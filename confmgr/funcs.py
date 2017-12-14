@@ -81,6 +81,8 @@ def get_configurations( path, pattern ):
     :type path: str
     :param pattern: regex to filter the configurations.
     :type pattern: str
+    :returns: configurations following "pattern".
+    :rtype: list(str)
     '''
     comp = re.compile(pattern)
     
@@ -145,7 +147,7 @@ def print_configuration( cfg, indent = 0 ):
     Display the given configuration.
 
     :param cfg: configuration.
-    :rtype cfg: dict
+    :type cfg: dict
     :param indent: indentation for the print function.
     :type indent: int
     '''
