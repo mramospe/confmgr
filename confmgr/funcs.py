@@ -48,12 +48,12 @@ def check_configurations( config, cfglst, skip = None ):
     :param config: configuration to check.
     :type config: dict
     :param cfglst: list of configuration files.
-    :type cfglst: list of ConfMgr
+    :type cfglst: list(ConfMgr)
     :param skip: dictionary with the parameters to avoid \
     for each section.
     :type skip: dict(str, list(str))
     :returns: list of configurations matching the input.
-    :rtype: list of ConfMgr
+    :rtype: list(ConfMgr)
     '''
     rmd = [_remove_elements(c, skip) for c in cfglst]
 
@@ -98,7 +98,7 @@ def manage_config_matches( matches, conf_id ):
     a new one with the given configuration ID.
 
     :param matches: list of files matching the configuration.
-    :type matches: list of str
+    :type matches: list(ConfMgr)
     :param conf_id: proposed configuration ID.
     :type conf_id: str
     :returns: configuration ID.
