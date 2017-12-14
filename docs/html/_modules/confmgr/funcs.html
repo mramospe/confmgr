@@ -51,7 +51,7 @@
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">re</span>
 
 <span class="c1"># confmgr</span>
-<span class="kn">from</span> <span class="nn">confmgr.core</span> <span class="k">import</span> <span class="n">ConfigMgr</span><span class="p">,</span> <span class="n">__main_config_name__</span>
+<span class="kn">from</span> <span class="nn">confmgr.core</span> <span class="k">import</span> <span class="n">ConfMgr</span><span class="p">,</span> <span class="n">__main_config_name__</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;check_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;get_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;manage_config_matches&#39;</span><span class="p">,</span> <span class="s1">&#39;print_configuration&#39;</span><span class="p">]</span>
@@ -63,13 +63,13 @@
 <span class="sd">    a dictionary.</span>
 
 <span class="sd">    :param cfg: input configuration.</span>
-<span class="sd">    :type cfg: ConfigMgr</span>
+<span class="sd">    :type cfg: ConfMgr</span>
 <span class="sd">    :param drop: &quot;section, element&quot; values to drop.</span>
 <span class="sd">    :type drop: dict</span>
 <span class="sd">    :returns: dropped values as a new configuration.</span>
-<span class="sd">    :rtype: ConfigMgr()</span>
+<span class="sd">    :rtype: ConfMgr()</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">rm_cfg</span> <span class="o">=</span> <span class="n">ConfigMgr</span><span class="p">()</span>
+    <span class="n">rm_cfg</span> <span class="o">=</span> <span class="n">ConfMgr</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">drop</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
         <span class="n">rm_cfg</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -90,12 +90,12 @@
 <span class="sd">    :param config: configuration to check.</span>
 <span class="sd">    :type config: dict</span>
 <span class="sd">    :param cfglst: list of configuration files.</span>
-<span class="sd">    :type cfglst: list of ConfigMgr</span>
+<span class="sd">    :type cfglst: list of ConfMgr</span>
 <span class="sd">    :param skip: dictionary with the parameters to avoid \</span>
 <span class="sd">    for each section.</span>
 <span class="sd">    :type skip: dict(str, list(str))</span>
 <span class="sd">    :returns: list of configurations matching the input.</span>
-<span class="sd">    :rtype: list of ConfigMgr</span>
+<span class="sd">    :rtype: list of ConfMgr</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">rmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">_remove_elements</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cfglst</span><span class="p">]</span>
 
@@ -162,7 +162,7 @@
 
         <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span>
 
-            <span class="n">confmgr</span> <span class="o">=</span> <span class="n">ConfigMgr</span><span class="p">()</span>
+            <span class="n">confmgr</span> <span class="o">=</span> <span class="n">ConfMgr</span><span class="p">()</span>
             <span class="n">confmgr</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">expath</span><span class="p">)</span>
             
             <span class="n">cfg_path</span> <span class="o">=</span> <span class="n">expath</span>

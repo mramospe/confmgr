@@ -54,19 +54,19 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">odict</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfigMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Configurable&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">]</span>
 
 
 <span class="c1"># Name of the section holding the general configuration variables</span>
 <span class="n">__main_config_name__</span> <span class="o">=</span> <span class="s1">&#39;GENERAL&#39;</span>
 
 
-<div class="viewcode-block" id="ConfigMgr"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfigMgr</span><span class="p">(</span><span class="n">ConfigParser</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfigParser</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to manage configurations built using the</span>
-<span class="sd">    :class:`Configurable` class.</span>
+<span class="sd">    :class:`Config` class.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="ConfigMgr.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        See :meth:`configparser.ConfigParser.__init__`.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -102,7 +102,7 @@
 <span class="sd">        :returns: processed element.</span>
 <span class="sd">        :rtype: any built class type</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Configurable</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
 
             <span class="c1"># So later it can be easily loaded</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">full_name</span><span class="p">())</span>
@@ -120,7 +120,7 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">element</span>
 
-<div class="viewcode-block" id="ConfigMgr.from_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr.from_config">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="ConfMgr.from_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_config">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_config</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Build the class from a configuration file.</span>
@@ -174,19 +174,19 @@
 
         <span class="k">return</span> <span class="n">cfg</span></div>
 
-<div class="viewcode-block" id="ConfigMgr.from_configurable"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr.from_configurable">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="ConfMgr.from_configurable"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_configurable">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_configurable</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cfg</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Build the class from a :class:`Configurable` object.</span>
+<span class="sd">        Build the class from a :class:`Config` object.</span>
 
 <span class="sd">        :param cfg: input configurable.</span>
-<span class="sd">        :type cfg: Configurable</span>
+<span class="sd">        :type cfg: Config</span>
 <span class="sd">        :returns: configuration manager.</span>
 <span class="sd">        :rtype: this class type</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="n">cfg</span><span class="p">})</span></div>
         
-<div class="viewcode-block" id="ConfigMgr.from_dict"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="ConfMgr.from_dict"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">dct</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Build the class from a dictionary.</span>
@@ -204,7 +204,7 @@
         
         <span class="k">return</span> <span class="n">cfg</span></div>
         
-<div class="viewcode-block" id="ConfigMgr.processed_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr.processed_config">[docs]</a>    <span class="k">def</span> <span class="nf">processed_config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.processed_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.processed_config">[docs]</a>    <span class="k">def</span> <span class="nf">processed_config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: processed configuration dictionary (where \</span>
 <span class="sd">        all the built classes are saved.</span>
@@ -212,7 +212,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span></div>
 
-<div class="viewcode-block" id="ConfigMgr.save"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfigMgr.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.save"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param cfg: configuration.</span>
 <span class="sd">        :type cfg: ConfigParser</span>
@@ -226,12 +226,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Configurable"><a class="viewcode-back" href="../../core.html#confmgr.core.Configurable">[docs]</a><span class="k">class</span> <span class="nc">Configurable</span><span class="p">:</span>
+<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../core.html#confmgr.core.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to store any class constructor plus its</span>
 <span class="sd">    configuration.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="Configurable.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.Configurable.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">dct</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">dct</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param const: constructor of the configurable class.</span>
 <span class="sd">        :type const: any class constructor</span>
@@ -243,7 +243,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span>   <span class="o">=</span> <span class="n">dct</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_const</span> <span class="o">=</span> <span class="n">const</span></div>
 
-<div class="viewcode-block" id="Configurable.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Configurable.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">dct</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">dct</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param dct: configuration to build the class.</span>
 <span class="sd">        :type dct: dict</span>
@@ -252,14 +252,14 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="n">dct</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Configurable.config"><a class="viewcode-back" href="../../core.html#confmgr.core.Configurable.config">[docs]</a>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.config"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.config">[docs]</a>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: configuration for the class in this object.</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span></div>
 
-<div class="viewcode-block" id="Configurable.full_name"><a class="viewcode-back" href="../../core.html#confmgr.core.Configurable.full_name">[docs]</a>    <span class="k">def</span> <span class="nf">full_name</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.full_name"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.full_name">[docs]</a>    <span class="k">def</span> <span class="nf">full_name</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: full name of the class attached to \</span>
 <span class="sd">        this configurable.</span>

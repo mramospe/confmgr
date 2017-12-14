@@ -164,7 +164,7 @@ class ConfMgr(ConfigParser):
         
     def processed_config( self ):
         '''
-        :returns: processed configuration dictionary (where \
+        :returns: processed configuration dictionary, where \
         all the built classes are saved.
         :rtype: dict
         '''
