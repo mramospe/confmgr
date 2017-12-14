@@ -90,12 +90,12 @@
 <span class="sd">    :param config: configuration to check.</span>
 <span class="sd">    :type config: dict</span>
 <span class="sd">    :param cfglst: list of configuration files.</span>
-<span class="sd">    :type cfglst: list of ConfMgr</span>
+<span class="sd">    :type cfglst: list(ConfMgr)</span>
 <span class="sd">    :param skip: dictionary with the parameters to avoid \</span>
 <span class="sd">    for each section.</span>
 <span class="sd">    :type skip: dict(str, list(str))</span>
 <span class="sd">    :returns: list of configurations matching the input.</span>
-<span class="sd">    :rtype: list of ConfMgr</span>
+<span class="sd">    :rtype: list(ConfMgr)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">rmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">_remove_elements</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cfglst</span><span class="p">]</span>
 
@@ -140,7 +140,7 @@
 <span class="sd">    a new one with the given configuration ID.</span>
 
 <span class="sd">    :param matches: list of files matching the configuration.</span>
-<span class="sd">    :type matches: list of str</span>
+<span class="sd">    :type matches: list(ConfMgr)</span>
 <span class="sd">    :param conf_id: proposed configuration ID.</span>
 <span class="sd">    :type conf_id: str</span>
 <span class="sd">    :returns: configuration ID.</span>
