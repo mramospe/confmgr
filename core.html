@@ -1,0 +1,674 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core &#8212; confmgr 0.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="funcs" href="funcs.html" />
+    <link rel="prev" title="Introduction" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-confmgr.core">
+<span id="core"></span><h1>core<a class="headerlink" href="#module-confmgr.core" title="Permalink to this headline">¶</a></h1>
+<p>Classes to parse configuration files.</p>
+<dl class="class">
+<dt id="confmgr.core.ConfMgr">
+<em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">ConfMgr</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">backports.configparser.ConfigParser</span></code></p>
+<p>Class to manage configurations built using the
+<a class="reference internal" href="#confmgr.core.Config" title="confmgr.core.Config"><code class="xref py py-class docutils literal"><span class="pre">Config</span></code></a> class.</p>
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.BOOLEAN_STATES">
+<code class="descname">BOOLEAN_STATES</code><em class="property"> = {u'1': True, u'on': True, u'false': False, u'0': False, u'off': False, u'yes': True, u'no': False, u'true': True}</em><a class="headerlink" href="#confmgr.core.ConfMgr.BOOLEAN_STATES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.NONSPACECRE">
+<code class="descname">NONSPACECRE</code><em class="property"> = &lt;_sre.SRE_Pattern object&gt;</em><a class="headerlink" href="#confmgr.core.ConfMgr.NONSPACECRE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.OPTCRE">
+<code class="descname">OPTCRE</code><em class="property"> = &lt;_sre.SRE_Pattern object&gt;</em><a class="headerlink" href="#confmgr.core.ConfMgr.OPTCRE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.OPTCRE_NV">
+<code class="descname">OPTCRE_NV</code><em class="property"> = &lt;_sre.SRE_Pattern object&gt;</em><a class="headerlink" href="#confmgr.core.ConfMgr.OPTCRE_NV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.SECTCRE">
+<code class="descname">SECTCRE</code><em class="property"> = &lt;_sre.SRE_Pattern object&gt;</em><a class="headerlink" href="#confmgr.core.ConfMgr.SECTCRE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__abstractmethods__">
+<code class="descname">__abstractmethods__</code><em class="property"> = frozenset([])</em><a class="headerlink" href="#confmgr.core.ConfMgr.__abstractmethods__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__class__">
+<code class="descname">__class__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__class__" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">ABCMeta</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(‘name’) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__delitem__">
+<code class="descname">__delitem__</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__dict__">
+<code class="descname">__dict__</code><em class="property"> = dict_proxy({'_abc_cache': &lt;_weakrefset.WeakSet object&gt;, '__module__': 'confmgr.core', 'from_configurable': &lt;classmethod object&gt;, '_abc_negative_cache': &lt;_weakrefset.WeakSet object&gt;, '__abstractmethods__': frozenset([]), '_proc_config_element': &lt;function _proc_config_element&gt;, 'from_config': &lt;classmethod object&gt;, 'processed_config': &lt;function processed_config&gt;, 'from_dict': &lt;classmethod object&gt;, '_abc_negative_cache_version': 31, '_proc_config': &lt;function _proc_config&gt;, 'save': &lt;function save&gt;, '_abc_registry': &lt;_weakrefset.WeakSet object&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(‘name’) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__hash__">
+<code class="descname">__hash__</code><em class="property"> = None</em><a class="headerlink" href="#confmgr.core.ConfMgr.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <code class="xref py py-meth docutils literal"><span class="pre">configparser.ConfigParser.__init__()</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__len__">
+<code class="descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__metaclass__">
+<code class="descname">__metaclass__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__metaclass__" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">ABCMeta</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__module__">
+<code class="descname">__module__</code><em class="property"> = 'confmgr.core'</em><a class="headerlink" href="#confmgr.core.ConfMgr.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__ne__">
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__new__">
+<code class="descname">__new__</code><span class="sig-paren">(</span><em>S</em>, <em>...</em><span class="sig-paren">)</span> &#x2192; a new object with type S, a subtype of T<a class="headerlink" href="#confmgr.core.ConfMgr.__new__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__repr__">
+<code class="descname">__repr__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(‘name’, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#confmgr.core.ConfMgr.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.__subclasshook__">
+<code class="descname">__subclasshook__</code><span class="sig-paren">(</span><em>C</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__subclasshook__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.add_section">
+<code class="descname">add_section</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.add_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new section in the configuration.  Extends
+RawConfigParser.add_section by validating if the section name is
+a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None.  Remove all items from D.<a class="headerlink" href="#confmgr.core.ConfMgr.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.ConfMgr.converters">
+<code class="descname">converters</code><a class="headerlink" href="#confmgr.core.ConfMgr.converters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.defaults">
+<code class="descname">defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.defaults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="confmgr.core.ConfMgr.from_config">
+<em class="property">classmethod </em><code class="descname">from_config</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the class from a configuration file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path to the configuration file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">this class type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="confmgr.core.ConfMgr.from_configurable">
+<em class="property">classmethod </em><code class="descname">from_configurable</code><span class="sig-paren">(</span><em>name</em>, <em>cfg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_configurable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_configurable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the class from a <a class="reference internal" href="#confmgr.core.Config" title="confmgr.core.Config"><code class="xref py py-class docutils literal"><span class="pre">Config</span></code></a> object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cfg</strong> (<a class="reference internal" href="#confmgr.core.Config" title="confmgr.core.Config"><em>Config</em></a>) – input configurable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">this class type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="confmgr.core.ConfMgr.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>dct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the class from a dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – input dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">this class type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an option value for a given section.</p>
+<p>If <a href="#id1"><span class="problematic" id="id2">`</span></a>vars’ is provided, it must be a dictionary. The option is looked up
+in <a href="#id3"><span class="problematic" id="id4">`</span></a>vars’ (if provided), <a href="#id5"><span class="problematic" id="id6">`</span></a>section’, and in <a href="#id7"><span class="problematic" id="id8">`</span></a>DEFAULTSECT’ in that order.
+If the key is not found and <a href="#id9"><span class="problematic" id="id10">`</span></a>fallback’ is provided, it is used as
+a fallback value. <a href="#id11"><span class="problematic" id="id12">`</span></a>None’ can be provided as a <a href="#id13"><span class="problematic" id="id14">`</span></a>fallback’ value.</p>
+<p>If interpolation is enabled and the optional argument <a href="#id15"><span class="problematic" id="id16">`</span></a>raw’ is False,
+all interpolations are expanded in the return values.</p>
+<p>Arguments <a href="#id17"><span class="problematic" id="id18">`</span></a>raw’, <a href="#id19"><span class="problematic" id="id20">`</span></a>vars’, and <a href="#id21"><span class="problematic" id="id22">`</span></a>fallback’ are keyword only.</p>
+<p>The section DEFAULT is special.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.getboolean">
+<code class="descname">getboolean</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.getboolean" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.getfloat">
+<code class="descname">getfloat</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.getfloat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.getint">
+<code class="descname">getint</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.getint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.has_option">
+<code class="descname">has_option</code><span class="sig-paren">(</span><em>section</em>, <em>option</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.has_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for the existence of a given option in a given section.
+If the specified <a href="#id23"><span class="problematic" id="id24">`</span></a>section’ is None or an empty string, DEFAULT is
+assumed. If the specified <a href="#id25"><span class="problematic" id="id26">`</span></a>section’ does not exist, returns False.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.has_section">
+<code class="descname">has_section</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.has_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicate whether the named section is present in the configuration.</p>
+<p>The DEFAULT section is not acknowledged.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.items">
+<code class="descname">items</code><span class="sig-paren">(</span><em>section=&lt;object object&gt;</em>, <em>raw=False</em>, <em>vars=None</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of (name, value) tuples for each option in a section.</p>
+<p>All % interpolations are expanded in the return values, based on the
+defaults passed into the constructor, unless the optional argument
+<a href="#id27"><span class="problematic" id="id28">`</span></a>raw’ is true.  Additional substitutions may be provided using the
+<a href="#id29"><span class="problematic" id="id30">`</span></a>vars’ argument, which must be a dictionary whose contents overrides
+any pre-existing defaults.</p>
+<p>The section DEFAULT is special.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.iteritems">
+<code class="descname">iteritems</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an iterator over the (key, value) items of D<a class="headerlink" href="#confmgr.core.ConfMgr.iteritems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.iterkeys">
+<code class="descname">iterkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an iterator over the keys of D<a class="headerlink" href="#confmgr.core.ConfMgr.iterkeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.itervalues">
+<code class="descname">itervalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an iterator over the values of D<a class="headerlink" href="#confmgr.core.ConfMgr.itervalues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list of D's keys<a class="headerlink" href="#confmgr.core.ConfMgr.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.options">
+<code class="descname">options</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of option names for the given section name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.optionxform">
+<code class="descname">optionxform</code><span class="sig-paren">(</span><em>optionstr</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.optionxform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; v, remove specified key and return the corresponding value.<a class="headerlink" href="#confmgr.core.ConfMgr.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.popitem">
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a section from the parser and return it as
+a (section_name, section_proxy) tuple. If no section is present, raise
+KeyError.</p>
+<p>The section DEFAULT is never returned because it cannot be removed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.processed_config">
+<code class="descname">processed_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.processed_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.processed_config" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary (where         all the built classes are saved.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>filenames</em>, <em>encoding=None</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read and parse a filename or a list of filenames.</p>
+<p>Files that cannot be opened are silently ignored; this is
+designed so that you can specify a list of potential
+configuration file locations (e.g. current directory, user’s
+home directory, systemwide directory), and all existing
+configuration files in the list will be read.  A single
+filename may also be given.</p>
+<p>Return list of successfully read files.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.read_dict">
+<code class="descname">read_dict</code><span class="sig-paren">(</span><em>dictionary</em>, <em>source=u'&lt;dict&gt;'</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.read_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read configuration from a dictionary.</p>
+<p>Keys are section names, values are dictionaries with keys and values
+that should be present in the section. If the used dictionary type
+preserves order, sections and their keys will be added in order.</p>
+<p>All types held in the dictionary are converted to strings during
+reading, including section names, option names and keys.</p>
+<p>Optional second argument is the <a href="#id31"><span class="problematic" id="id32">`</span></a>source’ specifying the name of the
+dictionary being read.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.read_file">
+<code class="descname">read_file</code><span class="sig-paren">(</span><em>f</em>, <em>source=None</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like read() but the argument must be a file-like object.</p>
+<p>The <a href="#id33"><span class="problematic" id="id34">`</span></a>f’ argument must be iterable, returning one line at a time.
+Optional second argument is the <a href="#id35"><span class="problematic" id="id36">`</span></a>source’ specifying the name of the
+file being read. If not given, it is taken from f.name. If <a href="#id37"><span class="problematic" id="id38">`</span></a>f’ has no
+<a href="#id39"><span class="problematic" id="id40">`</span></a>name’ attribute, <a href="#id41"><span class="problematic" id="id42">`</span></a>&lt;???&gt;’ is used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.read_string">
+<code class="descname">read_string</code><span class="sig-paren">(</span><em>string</em>, <em>source=u'&lt;string&gt;'</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.read_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read configuration from a given string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.readfp">
+<code class="descname">readfp</code><span class="sig-paren">(</span><em>fp</em>, <em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.readfp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated, use read_file instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.remove_option">
+<code class="descname">remove_option</code><span class="sig-paren">(</span><em>section</em>, <em>option</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.remove_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an option.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.remove_section">
+<code class="descname">remove_section</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.remove_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a file section.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.save" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cfg</strong> (<a class="reference external" href="https://docs.python.org/2/library/configparser.html#module-ConfigParser" title="(in Python v2.7)"><em>ConfigParser</em></a>) – configuration.</li>
+<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path to save the output file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.sections">
+<code class="descname">sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of section names, excluding [DEFAULT]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>section</em>, <em>option</em>, <em>value=None</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an option.  Extends RawConfigParser.set by validating type and
+interpolation syntax on the value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.setdefault">
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; D.get(k,d), also set D[k]=d if k not in D<a class="headerlink" href="#confmgr.core.ConfMgr.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &#x2192; None.  Update D from mapping/iterable E and F.<a class="headerlink" href="#confmgr.core.ConfMgr.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+In either case, this is followed by: for k, v in F.items(): D[k] = v</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list of D's values<a class="headerlink" href="#confmgr.core.ConfMgr.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.ConfMgr.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>fp</em>, <em>space_around_delimiters=True</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write an .ini-format representation of the configuration state.</p>
+<p>If <a href="#id43"><span class="problematic" id="id44">`</span></a>space_around_delimiters’ is True (the default), delimiters
+between keys and values are surrounded by spaces.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="confmgr.core.Config">
+<em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">Config</code><span class="sig-paren">(</span><em>const</em>, <em>dct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to store any class constructor plus its
+configuration.</p>
+<dl class="method">
+<dt id="confmgr.core.Config.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>const</em>, <em>dct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>const</strong> (<em>any class constructor</em>) – constructor of the configurable class.</li>
+<li><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – configuration of the class.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__module__">
+<code class="descname">__module__</code><em class="property"> = 'confmgr.core'</em><a class="headerlink" href="#confmgr.core.Config.__module__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.build">
+<code class="descname">build</code><span class="sig-paren">(</span><em>dct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.build" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – configuration to build the class.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">built class</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">built class type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.config">
+<code class="descname">config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.config" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">configuration for the class in this object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.full_name">
+<code class="descname">full_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.full_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.full_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">full name of the class attached to         this configurable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">confmgr</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="funcs.html">funcs</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="funcs.html" title="next chapter">funcs</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Miguel Ramos Pernas.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/core.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
