@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
 SPHINXPROJ    = confmgr
 SOURCEDIR     = source
-BUILDDIR      = ./
+BUILDDIR      = ../../confmgr-docs
 
 # Put it first so that "make" without argument is like "make help".
 help:
