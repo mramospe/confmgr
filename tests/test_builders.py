@@ -1,5 +1,5 @@
 '''
-Test some constructors
+Test some constructors.
 '''
 
 __author__ = 'Miguel Ramos Pernas'

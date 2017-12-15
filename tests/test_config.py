@@ -12,7 +12,7 @@ import os
 
 # confmgr
 import confmgr
-from confmgr.core import main_config_name
+from confmgr.core import main_section_name
 
 
 __fname__ = 'test_config.ini'
@@ -37,7 +37,7 @@ def _generate_and_check( func ):
 
         read = confmgr.ConfMgr.from_file(__fname__)
 
-        matches = confmgr.check_configurations(cfg, [read], skip = {main_config_name(): ['int']})
+        matches = confmgr.check_configurations(cfg, [read], skip = {main_section_name(): ['int']})
 
         os.remove(__fname__)
 

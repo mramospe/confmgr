@@ -12,14 +12,14 @@ from configparser import ConfigParser
 from collections import OrderedDict as odict
 
 
-__all__ = ['ConfMgr', 'Config', 'main_config_name']
+__all__ = ['ConfMgr', 'Config', 'main_section_name']
 
 
 # Name of the section holding the general configuration variables
-__main_config_name__ = 'GENERAL'
+__main_section_name__ = 'GENERAL'
 
 
-def main_config_name():
+def main_section_name():
     '''
     Return the name of the main configuration section
     for any file.
@@ -27,7 +27,7 @@ def main_config_name():
     :returns: main configuration name ("GENERAL" by default).
     :rtype: str
     '''
-    return __main_config_name__
+    return __main_section_name__
 
 
 class ConfMgr(ConfigParser):
@@ -194,9 +194,9 @@ class ConfMgr(ConfigParser):
         '''
         cfg = cls()
         
-        cfg.add_section(main_config_name())
+        cfg.add_section(main_section_name())
         
-        cfg._dct = cfg._proc_config(main_config_name(), dct)
+        cfg._dct = cfg._proc_config(main_section_name(), dct)
         
         return cfg
         

@@ -9,7 +9,7 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 import os, re
 
 # confmgr
-from confmgr.core import ConfMgr, main_config_name
+from confmgr.core import ConfMgr, main_section_name
 
 
 __all__ = ['check_configurations', 'get_configurations', 'manage_config_matches']
@@ -127,7 +127,7 @@ def manage_config_matches( matches, conf_id ):
             confmgr.read(expath)
             
             cfg_path = expath
-            conf_id  = confmgr[main_config_name()]['confid']
+            conf_id  = confmgr[main_section_name()]['confid']
             
         else:
             d = ''
