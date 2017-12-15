@@ -104,7 +104,7 @@
 
 <dl class="attribute">
 <dt id="confmgr.core.ConfMgr.__dict__">
-<code class="descname">__dict__</code><em class="property"> = dict_proxy({'_abc_cache': &lt;_weakrefset.WeakSet object&gt;, '__module__': 'confmgr.core', 'from_configurable': &lt;classmethod object&gt;, '_abc_negative_cache': &lt;_weakrefset.WeakSet object&gt;, '__abstractmethods__': frozenset([]), '_proc_config_element': &lt;function _proc_config_element&gt;, 'from_config': &lt;classmethod object&gt;, 'processed_config': &lt;function processed_config&gt;, 'from_dict': &lt;classmethod object&gt;, '_abc_negative_cache_version': 31, '_proc_config': &lt;function _proc_config&gt;, 'save': &lt;function save&gt;, '_abc_registry': &lt;_weakrefset.WeakSet object&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '_abc_cache': &lt;_weakrefset.WeakSet object&gt;, '__module__': 'confmgr.core', '_abc_negative_cache': &lt;_weakrefset.WeakSet object&gt;, '__str__': &lt;function __str__&gt;, '__abstractmethods__': frozenset([]), '_proc_config_element': &lt;function _proc_config_element&gt;, 'from_config': &lt;classmethod object&gt;, 'processed_config': &lt;function processed_config&gt;, 'from_dict': &lt;classmethod object&gt;, '_abc_negative_cache_version': 31, '_proc_config': &lt;function _proc_config&gt;, 'save': &lt;function save&gt;, '_abc_registry': &lt;_weakrefset.WeakSet object&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -205,10 +205,11 @@
 <dd><p>size of object in memory, in bytes</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="confmgr.core.ConfMgr.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is displayed showing separately each section.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.__subclasshook__">
@@ -246,25 +247,7 @@ a string.</p>
 
 <dl class="classmethod">
 <dt id="confmgr.core.ConfMgr.from_config">
-<em class="property">classmethod </em><code class="descname">from_config</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build the class from a configuration file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path to the configuration file.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">this class type</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="confmgr.core.ConfMgr.from_configurable">
-<em class="property">classmethod </em><code class="descname">from_configurable</code><span class="sig-paren">(</span><em>name</em>, <em>cfg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_configurable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_configurable" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">from_config</code><span class="sig-paren">(</span><em>name</em>, <em>cfg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the class from a <a class="reference internal" href="#confmgr.core.Config" title="confmgr.core.Config"><code class="xref py py-class docutils literal"><span class="pre">Config</span></code></a> object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -289,6 +272,24 @@ a string.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – input dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">this class type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="confmgr.core.ConfMgr.from_file">
+<em class="property">classmethod </em><code class="descname">from_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the class from a configuration file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path to the configuration file.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
 </tr>
@@ -407,7 +408,7 @@ KeyError.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary (where         all the built classes are saved.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary, where         all the built classes are saved.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
@@ -607,6 +608,22 @@ configuration.</p>
 </table>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="function">
+<dt id="confmgr.core.main_config_name">
+<code class="descclassname">confmgr.core.</code><code class="descname">main_config_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#main_config_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.main_config_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the main configurations for any file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">main configuration name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

@@ -54,11 +54,21 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">odict</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">,</span> <span class="s1">&#39;main_config_name&#39;</span><span class="p">]</span>
 
 
 <span class="c1"># Name of the section holding the general configuration variables</span>
 <span class="n">__main_config_name__</span> <span class="o">=</span> <span class="s1">&#39;GENERAL&#39;</span>
+
+
+<div class="viewcode-block" id="main_config_name"><a class="viewcode-back" href="../../core.html#confmgr.core.main_config_name">[docs]</a><span class="k">def</span> <span class="nf">main_config_name</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Return the name of the main configurations for any file.</span>
+
+<span class="sd">    :returns: main configuration name.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">__main_config_name__</span></div>
 
 
 <div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfigParser</span><span class="p">):</span>
@@ -73,6 +83,33 @@
         <span class="n">ConfigParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">odict</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ConfMgr.__str__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This class is displayed showing separately each section.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        
+        <span class="n">maxl</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">()))</span>
+        
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">():</span>
+            
+            <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+                <span class="n">frmt</span> <span class="o">=</span> <span class="s1">&#39;{:&lt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">maxl</span><span class="p">)</span>
+                
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{} = (&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">))</span>
+                
+                <span class="n">mxi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">it</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">items</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span>
+                <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+                    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mxi</span><span class="p">,</span> <span class="n">it</span><span class="p">))</span>
+                
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;6}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">))</span>
+                
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_proc_config</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -120,8 +157,8 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">element</span>
 
-<div class="viewcode-block" id="ConfMgr.from_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_config">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_config</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.from_file"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_file">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Build the class from a configuration file.</span>
 
@@ -174,8 +211,8 @@
 
         <span class="k">return</span> <span class="n">cfg</span></div>
 
-<div class="viewcode-block" id="ConfMgr.from_configurable"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_configurable">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_configurable</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cfg</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.from_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_config">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_config</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cfg</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Build the class from a :class:`Config` object.</span>
 
@@ -198,15 +235,15 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">cfg</span> <span class="o">=</span> <span class="n">cls</span><span class="p">()</span>
         
-        <span class="n">cfg</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">__main_config_name__</span><span class="p">)</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">main_config_name</span><span class="p">())</span>
         
-        <span class="n">cfg</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">_proc_config</span><span class="p">(</span><span class="n">__main_config_name__</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">_proc_config</span><span class="p">(</span><span class="n">main_config_name</span><span class="p">(),</span> <span class="n">dct</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">cfg</span></div>
         
 <div class="viewcode-block" id="ConfMgr.processed_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.processed_config">[docs]</a>    <span class="k">def</span> <span class="nf">processed_config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :returns: processed configuration dictionary (where \</span>
+<span class="sd">        :returns: processed configuration dictionary, where \</span>
 <span class="sd">        all the built classes are saved.</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>

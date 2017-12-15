@@ -51,10 +51,10 @@
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">re</span>
 
 <span class="c1"># confmgr</span>
-<span class="kn">from</span> <span class="nn">confmgr.core</span> <span class="k">import</span> <span class="n">ConfMgr</span><span class="p">,</span> <span class="n">__main_config_name__</span>
+<span class="kn">from</span> <span class="nn">confmgr.core</span> <span class="k">import</span> <span class="n">ConfMgr</span><span class="p">,</span> <span class="n">main_config_name</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;check_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;get_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;manage_config_matches&#39;</span><span class="p">,</span> <span class="s1">&#39;print_configuration&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;check_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;get_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;manage_config_matches&#39;</span><span class="p">]</span>
 
 
 <span class="k">def</span> <span class="nf">_remove_elements</span><span class="p">(</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">drop</span> <span class="p">):</span>
@@ -168,7 +168,7 @@
             <span class="n">confmgr</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">expath</span><span class="p">)</span>
             
             <span class="n">cfg_path</span> <span class="o">=</span> <span class="n">expath</span>
-            <span class="n">conf_id</span>  <span class="o">=</span> <span class="n">confmgr</span><span class="p">[</span><span class="n">__main_config_name__</span><span class="p">][</span><span class="s1">&#39;confid&#39;</span><span class="p">]</span>
+            <span class="n">conf_id</span>  <span class="o">=</span> <span class="n">confmgr</span><span class="p">[</span><span class="n">main_config_name</span><span class="p">()][</span><span class="s1">&#39;confid&#39;</span><span class="p">]</span>
             
         <span class="k">else</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -182,32 +182,6 @@
                 <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">conf_id</span></div>
-
-
-<div class="viewcode-block" id="print_configuration"><a class="viewcode-back" href="../../funcs.html#confmgr.funcs.print_configuration">[docs]</a><span class="k">def</span> <span class="nf">print_configuration</span><span class="p">(</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Display the given configuration.</span>
-
-<span class="sd">    :param cfg: configuration.</span>
-<span class="sd">    :type cfg: dict</span>
-<span class="sd">    :param indent: indentation for the print function.</span>
-<span class="sd">    :type indent: int</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">maxl</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-
-    <span class="n">lsp</span> <span class="o">=</span> <span class="n">maxl</span> <span class="o">+</span> <span class="n">indent</span>
-    
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-        
-        <span class="n">d</span> <span class="o">=</span> <span class="s1">&#39;{:&gt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;{:&lt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">maxl</span><span class="p">),</span> <span class="n">lsp</span><span class="p">)</span>
-        
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;iteritems&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span> <span class="s1">&#39;{} = (&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-                <span class="n">print_configuration</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
-                <span class="nb">print</span> <span class="s1">&#39;{:&gt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span> <span class="s1">&#39;{} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
