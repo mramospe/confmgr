@@ -21,9 +21,10 @@ __main_config_name__ = 'GENERAL'
 
 def main_config_name():
     '''
-    Return the name of the main configurations for any file.
+    Return the name of the main configuration section
+    for any file.
 
-    :returns: main configuration name (GENERAL by default).
+    :returns: main configuration name ("GENERAL" by default).
     :rtype: str
     '''
     return __main_config_name__
