@@ -54,14 +54,14 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">odict</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">,</span> <span class="s1">&#39;main_config_name&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">,</span> <span class="s1">&#39;main_section_name&#39;</span><span class="p">]</span>
 
 
 <span class="c1"># Name of the section holding the general configuration variables</span>
-<span class="n">__main_config_name__</span> <span class="o">=</span> <span class="s1">&#39;GENERAL&#39;</span>
+<span class="n">__main_section_name__</span> <span class="o">=</span> <span class="s1">&#39;GENERAL&#39;</span>
 
 
-<div class="viewcode-block" id="main_config_name"><a class="viewcode-back" href="../../core.html#confmgr.core.main_config_name">[docs]</a><span class="k">def</span> <span class="nf">main_config_name</span><span class="p">():</span>
+<div class="viewcode-block" id="main_section_name"><a class="viewcode-back" href="../../core.html#confmgr.core.main_section_name">[docs]</a><span class="k">def</span> <span class="nf">main_section_name</span><span class="p">():</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Return the name of the main configuration section</span>
 <span class="sd">    for any file.</span>
@@ -69,7 +69,7 @@
 <span class="sd">    :returns: main configuration name (&quot;GENERAL&quot; by default).</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">__main_config_name__</span></div>
+    <span class="k">return</span> <span class="n">__main_section_name__</span></div>
 
 
 <div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfigParser</span><span class="p">):</span>
@@ -236,9 +236,9 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">cfg</span> <span class="o">=</span> <span class="n">cls</span><span class="p">()</span>
         
-        <span class="n">cfg</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">main_config_name</span><span class="p">())</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">main_section_name</span><span class="p">())</span>
         
-        <span class="n">cfg</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">_proc_config</span><span class="p">(</span><span class="n">main_config_name</span><span class="p">(),</span> <span class="n">dct</span><span class="p">)</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">_proc_config</span><span class="p">(</span><span class="n">main_section_name</span><span class="p">(),</span> <span class="n">dct</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">cfg</span></div>
         
