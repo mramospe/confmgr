@@ -23,9 +23,9 @@ def main_config_name():
     '''
     Return the name of the main configurations for any file.
 
-    :returns: main configuration name.
+    :returns: main configuration name ({} by default).
     :rtype: str
-    '''
+    '''.format(__main_config_name__)
     return __main_config_name__
 
 
