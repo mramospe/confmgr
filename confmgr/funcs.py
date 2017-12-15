@@ -82,13 +82,14 @@ def get_configurations( path, pattern ):
     :param pattern: regex to filter the configurations.
     :type pattern: str
     :returns: configurations following "pattern".
-    :rtype: list(str)
+    :rtype: list(ConfMgr)
     '''
     comp = re.compile(pattern)
     
     matches = [comp.match(f) for f in os.listdir(path)]
     
-    full_lst = ['{}/{}'.format(path, f.string) for f in matches if f is not None]
+    full_lst = [ConfMgr.from_file('{}/{}'.format(path, f.string))
+                for f in matches if f is not None]
     
     return full_lst
 
