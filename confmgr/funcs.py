@@ -12,7 +12,7 @@ import os, re
 from confmgr.core import ConfMgr, main_section_name
 
 
-__all__ = ['check_configurations', 'get_configurations', 'manage_config_matches']
+__all__ = ['check_configurations', 'get_configurations']
 
 
 def _remove_elements( cfg, drop ):
@@ -30,10 +30,16 @@ def _remove_elements( cfg, drop ):
     rm_cfg = ConfMgr()
 
     for s, l in drop.iteritems():
-        rm_cfg.add_section(s)
-        for e in l:
-            rm_cfg.set(s, e, cfg.get(s, e))
-            cfg.remove_option(s, e)
+
+        tr = set(map(lambda i: i[0], cfg.items(s))) & set(l)
+        
+        if len(tr) > 0:
+            
+            rm_cfg.add_section(s)
+            
+            for e in tr:
+                rm_cfg.set(s, e, cfg.get(s, e))
+                cfg.remove_option(s, e)
 
     return rm_cfg
 
@@ -56,12 +62,12 @@ def check_configurations( config, cfglst, skip = None ):
     :rtype: list(ConfMgr)
     '''
     rmd = [_remove_elements(c, skip) for c in cfglst]
-
+    
     r = _remove_elements(config, skip)
     
     matches = []
     for cfg, rm in zip(cfglst, rmd):
-        
+
         if cfg == config:
             matches.append(cfg)
 
@@ -92,52 +98,3 @@ def get_configurations( path, pattern ):
                 for f in matches if f is not None]
     
     return full_lst
-
-
-def manage_config_matches( matches, conf_id ):
-    '''
-    Manage the matched configurations, asking 
-    to overwrite the first matching file or create
-    a new one with the given configuration ID.
-
-    :param matches: list of files matching the configuration.
-    :type matches: list(ConfMgr)
-    :param conf_id: proposed configuration ID.
-    :type conf_id: str
-    :returns: configuration ID.
-    :rtype: str
-    '''
-    if matches:
-
-        print 'Found {} file(s) with the same configuration'.format(len(matches))
-        
-        expath = matches[-1][0]
-        
-        d = ''
-        while d not in ('Y', 'n'):
-            d = raw_input('Overwrite existing configuration file '\
-                              '"{}"? (Y/[n]): '.format(expath)
-                          ).strip()
-            if not d:
-                d = 'n'
-
-        if d == 'Y':
-
-            confmgr = ConfMgr()
-            confmgr.read(expath)
-            
-            cfg_path = expath
-            conf_id  = confmgr[main_section_name()]['confid']
-            
-        else:
-            d = ''
-            while d not in ('Y', 'n'):
-                d = raw_input('Do you want to create a new configuration file? (Y/[n]): ')
-                    
-                if not d:
-                    d = 'n'
-            
-            if d == 'n':
-                exit(0)
-
-    return conf_id
