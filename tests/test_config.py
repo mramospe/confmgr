@@ -39,7 +39,7 @@ def _generate_and_check( func ):
 
         matches = confmgr.check_configurations(cfg, [read], skip = {main_config_name(): ['int']})
 
-        #os.remove(__fname__)
+        os.remove(__fname__)
 
         assert len(matches) == 1
 
