@@ -9,10 +9,10 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 import os, re
 
 # confmgr
-from confmgr.core import ConfMgr, __main_config_name__
+from confmgr.core import ConfMgr, main_config_name
 
 
-__all__ = ['check_configurations', 'get_configurations', 'manage_config_matches', 'print_configuration']
+__all__ = ['check_configurations', 'get_configurations', 'manage_config_matches']
 
 
 def _remove_elements( cfg, drop ):
@@ -126,7 +126,7 @@ def manage_config_matches( matches, conf_id ):
             confmgr.read(expath)
             
             cfg_path = expath
-            conf_id  = confmgr[__main_config_name__]['confid']
+            conf_id  = confmgr[main_config_name()]['confid']
             
         else:
             d = ''
@@ -140,29 +140,3 @@ def manage_config_matches( matches, conf_id ):
                 exit(0)
 
     return conf_id
-
-
-def print_configuration( cfg, indent = 0 ):
-    '''
-    Display the given configuration.
-
-    :param cfg: configuration.
-    :type cfg: dict
-    :param indent: indentation for the print function.
-    :type indent: int
-    '''
-    maxl = max(map(len, cfg.keys()))
-
-    lsp = maxl + indent
-    
-    for k, v in cfg.iteritems():
-        
-        d = '{:>{}}'.format('{:<{}}'.format(k, maxl), lsp)
-        
-        if hasattr(v, 'iteritems'):
-            if len(v.keys()) > 0:
-                print '{} = ('.format(d)
-                print_configuration(v, indent + 5)
-                print '{:>{}}'.format(')', indent + 5)
-        else:
-            print '{} = {}'.format(d, v)

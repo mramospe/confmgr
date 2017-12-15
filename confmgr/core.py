@@ -12,11 +12,21 @@ from configparser import ConfigParser
 from collections import OrderedDict as odict
 
 
-__all__ = ['ConfMgr', 'Config']
+__all__ = ['ConfMgr', 'Config', 'main_config_name']
 
 
 # Name of the section holding the general configuration variables
 __main_config_name__ = 'GENERAL'
+
+
+def main_config_name():
+    '''
+    Return the name of the main configurations for any file.
+
+    :returns: main configuration name.
+    :rtype: str
+    '''
+    return __main_config_name__
 
 
 class ConfMgr(ConfigParser):
@@ -31,6 +41,33 @@ class ConfMgr(ConfigParser):
         ConfigParser.__init__(self, *args, **kwargs)
         
         self._dct = odict()
+
+    def __str__( self ):
+        '''
+        This class is displayed showing separately each section.
+        '''
+        out = '\n'
+        
+        maxl = max(map(len, self.sections()))
+        
+        lines = []
+        for s in self.sections():
+            
+            items = self.items(s)
+            
+            if len(items) > 0:
+
+                frmt = '{:<{}}'.format(s, maxl)
+                
+                lines.append('{} = ('.format(frmt))
+                
+                mxi = max(map(lambda it: len(it[0]), items)) + 5
+                for n, it in items:
+                    lines.append('{:>{}} = {}'.format(n, mxi, it))
+                
+                lines.append('{:>6}'.format(')'))
+                
+        return out.join(lines)
 
     def _proc_config( self, name, config ):
         '''
@@ -79,7 +116,7 @@ class ConfMgr(ConfigParser):
                 return element
 
     @classmethod
-    def from_config( cls, path ):
+    def from_file( cls, path ):
         '''
         Build the class from a configuration file.
 
@@ -133,7 +170,7 @@ class ConfMgr(ConfigParser):
         return cfg
 
     @classmethod
-    def from_configurable( cls, name, cfg ):
+    def from_config( cls, name, cfg ):
         '''
         Build the class from a :class:`Config` object.
 
@@ -156,9 +193,9 @@ class ConfMgr(ConfigParser):
         '''
         cfg = cls()
         
-        cfg.add_section(__main_config_name__)
+        cfg.add_section(main_config_name())
         
-        cfg._dct = cfg._proc_config(__main_config_name__, dct)
+        cfg._dct = cfg._proc_config(main_config_name(), dct)
         
         return cfg
         

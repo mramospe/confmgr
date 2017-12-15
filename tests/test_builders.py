@@ -52,14 +52,14 @@ def test_configmgr():
     
     mgr = Config(B, {'arg1': base, 'arg2': 'name'})
 
-    cfg = ConfMgr.from_configurable('manager', mgr)
+    cfg = ConfMgr.from_config('manager', mgr)
     
     path = './' + __fname__
     
     cfg.save(path)
 
     # Build the configuration from the file and get the manager
-    rcfg = ConfMgr.from_config(path)
+    rcfg = ConfMgr.from_file(path)
     
     mgr = rcfg.processed_config()['manager']
 

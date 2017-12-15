@@ -27,8 +27,6 @@ args = parser.parse_args()
 # Iterate over the input files to print the configurations
 for f in args.files:
 
-    cfg = confmgr.readconfig(f)
-
     print '-- Configuration in file "{}"'.format(f)
     
-    confmgr.print_configuration(cfg)
+    print confmgr.ConfMgr.from_file(f)
