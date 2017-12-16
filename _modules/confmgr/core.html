@@ -83,7 +83,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ConfigParser</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">odict</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span> <span class="o">=</span> <span class="n">odict</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ConfMgr.__str__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -112,51 +112,39 @@
                 
         <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_proc_config</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_process_conf</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">conf</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Process the given configuration dictionary.</span>
 <span class="sd">        </span>
 <span class="sd">        :param name: name of the section.</span>
 <span class="sd">        :type name: str</span>
-<span class="sd">        :param config: items to process.</span>
-<span class="sd">        :type config: dict</span>
+<span class="sd">        :param conf: items to process.</span>
+<span class="sd">        :type conf: dict</span>
 <span class="sd">        :returns: processed dictionary.</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="n">odict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc_config_element</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
-                     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())</span>
-                     <span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">odict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()):</span>
 
-    <span class="k">def</span> <span class="nf">_proc_config_element</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">element</span> <span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Process one configuration element.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
 
-<span class="sd">        :param section: section attached to the element.</span>
-<span class="sd">        :type section: str</span>
-<span class="sd">        :param name: name of the element.</span>
-<span class="sd">        :type name: str</span>
-<span class="sd">        :param element: element to process.</span>
-<span class="sd">        :type element: any class type</span>
-<span class="sd">        :returns: processed element.</span>
-<span class="sd">        :rtype: any built class type</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
-
-            <span class="c1"># So later it can be easily loaded</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">full_name</span><span class="p">())</span>
+                <span class="c1"># So later it can be easily loaded</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">full_name</span><span class="p">())</span>
             
-            <span class="bp">self</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
             
-            <span class="n">dct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proc_config</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">config</span><span class="p">())</span>
+                <span class="n">dct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_conf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">conf</span><span class="p">())</span>
 
-            <span class="k">return</span> <span class="n">element</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+                <span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">dct</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
 
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">element</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        
+        <span class="k">return</span> <span class="n">out</span>
 
 <div class="viewcode-block" id="ConfMgr.from_file"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_file">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
@@ -208,7 +196,7 @@
                     <span class="c1"># Call the constructor</span>
                     <span class="n">dct</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
 
-        <span class="n">cfg</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">res</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">_conf</span> <span class="o">=</span> <span class="n">res</span>
 
         <span class="k">return</span> <span class="n">cfg</span></div>
 
@@ -238,17 +226,17 @@
         
         <span class="n">cfg</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">main_section_name</span><span class="p">())</span>
         
-        <span class="n">cfg</span><span class="o">.</span><span class="n">_dct</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">_proc_config</span><span class="p">(</span><span class="n">main_section_name</span><span class="p">(),</span> <span class="n">dct</span><span class="p">)</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">_conf</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">_process_conf</span><span class="p">(</span><span class="n">main_section_name</span><span class="p">(),</span> <span class="n">dct</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">cfg</span></div>
         
-<div class="viewcode-block" id="ConfMgr.processed_config"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.processed_config">[docs]</a>    <span class="k">def</span> <span class="nf">processed_config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.proc_conf"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.proc_conf">[docs]</a>    <span class="k">def</span> <span class="nf">proc_conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: processed configuration dictionary, where \</span>
 <span class="sd">        all the built classes are saved.</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span></div>
 
 <div class="viewcode-block" id="ConfMgr.save"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -274,28 +262,32 @@
 <span class="sd">        :param const: constructor of the configurable class.</span>
 <span class="sd">        :type const: any class constructor</span>
 <span class="sd">        :param dct: configuration of the class.</span>
-<span class="sd">        :type dct: dict</span>
+<span class="sd">        :type dct: dict or None</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">dct</span> <span class="o">=</span> <span class="n">dct</span> <span class="ow">or</span> <span class="p">{}</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span>   <span class="o">=</span> <span class="n">dct</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span>  <span class="o">=</span> <span class="n">dct</span> <span class="ow">or</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_const</span> <span class="o">=</span> <span class="n">const</span></div>
 
-<div class="viewcode-block" id="Config.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">dct</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">dct</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :param dct: configuration to build the class.</span>
-<span class="sd">        :type dct: dict</span>
-<span class="sd">        :returns: built class</span>
+<span class="sd">        :param dct: configuration to build the class. If None \</span>
+<span class="sd">        is provided, it is assumed that the stored configuration \</span>
+<span class="sd">        has the correct format i.e there are no other Config \</span>
+<span class="sd">        classes within it, or the constructor expects them.</span>
+<span class="sd">        :type dct: dict or None</span>
+<span class="sd">        :returns: built class.</span>
 <span class="sd">        :rtype: built class type</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="n">dct</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">dct</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_conf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="n">dct</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Config.config"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.config">[docs]</a>    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.conf"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.conf">[docs]</a>    <span class="k">def</span> <span class="nf">conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: configuration for the class in this object.</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dct</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span></div>
 
 <div class="viewcode-block" id="Config.full_name"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.full_name">[docs]</a>    <span class="k">def</span> <span class="nf">full_name</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>

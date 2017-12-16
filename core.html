@@ -104,7 +104,7 @@
 
 <dl class="attribute">
 <dt id="confmgr.core.ConfMgr.__dict__">
-<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '_abc_cache': &lt;_weakrefset.WeakSet object&gt;, '__module__': 'confmgr.core', '_abc_negative_cache': &lt;_weakrefset.WeakSet object&gt;, '__str__': &lt;function __str__&gt;, '__abstractmethods__': frozenset([]), '_proc_config_element': &lt;function _proc_config_element&gt;, 'from_config': &lt;classmethod object&gt;, 'processed_config': &lt;function processed_config&gt;, 'from_dict': &lt;classmethod object&gt;, '_abc_negative_cache_version': 31, '_proc_config': &lt;function _proc_config&gt;, 'save': &lt;function save&gt;, '_abc_registry': &lt;_weakrefset.WeakSet object&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '_abc_cache': &lt;_weakrefset.WeakSet object&gt;, '__module__': 'confmgr.core', 'proc_conf': &lt;function proc_conf&gt;, '_abc_negative_cache': &lt;_weakrefset.WeakSet object&gt;, '__str__': &lt;function __str__&gt;, '__abstractmethods__': frozenset([]), 'from_config': &lt;classmethod object&gt;, 'from_dict': &lt;classmethod object&gt;, '_abc_negative_cache_version': 31, '_process_conf': &lt;function _process_conf&gt;, 'save': &lt;function save&gt;, '_abc_registry': &lt;_weakrefset.WeakSet object&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -402,8 +402,8 @@ KeyError.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="confmgr.core.ConfMgr.processed_config">
-<code class="descname">processed_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.processed_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.processed_config" title="Permalink to this definition">¶</a></dt>
+<dt id="confmgr.core.ConfMgr.proc_conf">
+<code class="descname">proc_conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.proc_conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.proc_conf" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -548,7 +548,7 @@ configuration.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>const</strong> (<em>any class constructor</em>) – constructor of the configurable class.</li>
-<li><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – configuration of the class.</li>
+<li><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – configuration of the class.</li>
 </ul>
 </td>
 </tr>
@@ -563,14 +563,14 @@ configuration.</p>
 
 <dl class="method">
 <dt id="confmgr.core.Config.build">
-<code class="descname">build</code><span class="sig-paren">(</span><em>dct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.build" title="Permalink to this definition">¶</a></dt>
+<code class="descname">build</code><span class="sig-paren">(</span><em>dct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.build" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – configuration to build the class.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – configuration to build the class. If None         is provided, it is assumed that the stored configuration         has the correct format i.e there are no other Config         classes within it, or the constructor expects them.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">built class</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">built class.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">built class type</td>
 </tr>
@@ -579,8 +579,8 @@ configuration.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="confmgr.core.Config.config">
-<code class="descname">config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.config" title="Permalink to this definition">¶</a></dt>
+<dt id="confmgr.core.Config.conf">
+<code class="descname">conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.conf" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
