@@ -41,7 +41,7 @@ class ConfMgr(ConfigParser):
         '''
         ConfigParser.__init__(self, *args, **kwargs)
         
-        self._dct = odict()
+        self._conf = odict()
 
     def __str__( self ):
         '''
@@ -70,51 +70,39 @@ class ConfMgr(ConfigParser):
                 
         return out.join(lines)
 
-    def _proc_config( self, name, config ):
+    def _process_conf( self, name, conf ):
         '''
         Process the given configuration dictionary.
         
         :param name: name of the section.
         :type name: str
-        :param config: items to process.
-        :type config: dict
+        :param conf: items to process.
+        :type conf: dict
         :returns: processed dictionary.
         :rtype: dict
         '''
-        return odict((k, self._proc_config_element(name, k, v))
-                     for k, v in sorted(config.iteritems())
-                     )
+        out = odict()
+        for k, v in sorted(conf.iteritems()):
 
-    def _proc_config_element( self, section, name, element ):
-        '''
-        Process one configuration element.
+            if isinstance(v, Config):
 
-        :param section: section attached to the element.
-        :type section: str
-        :param name: name of the element.
-        :type name: str
-        :param element: element to process.
-        :type element: any class type
-        :returns: processed element.
-        :rtype: any built class type
-        '''
-        if isinstance(element, Config):
-
-            # So later it can be easily loaded
-            self.set(section, name, element.full_name())
+                # So later it can be easily loaded
+                self.set(name, k, v.full_name())
             
-            self.add_section(name)
+                self.add_section(k)
             
-            dct = self._proc_config(name, element.config())
+                dct = self._process_conf(k, v.conf())
 
-            return element.build(dct)
-        else:
-            self.set(section, name, str(element))
+                out[k] = v.build(dct)
+            else:
+                self.set(name, k, str(v))
 
-            try:
-                return eval(element)
-            except:
-                return element
+                try:
+                    out[k] = eval(v)
+                except:
+                    out[k] = v
+        
+        return out
 
     @classmethod
     def from_file( cls, path ):
@@ -166,7 +154,7 @@ class ConfMgr(ConfigParser):
                     # Call the constructor
                     dct[n] = const(**inputs)
 
-        cfg._dct = res
+        cfg._conf = res
 
         return cfg
 
@@ -196,17 +184,17 @@ class ConfMgr(ConfigParser):
         
         cfg.add_section(main_section_name())
         
-        cfg._dct = cfg._proc_config(main_section_name(), dct)
+        cfg._conf = cfg._process_conf(main_section_name(), dct)
         
         return cfg
         
-    def processed_config( self ):
+    def proc_conf( self ):
         '''
         :returns: processed configuration dictionary, where \
         all the built classes are saved.
         :rtype: dict
         '''
-        return self._dct
+        return self._conf
 
     def save( self, path ):
         '''
@@ -232,28 +220,32 @@ class Config:
         :param const: constructor of the configurable class.
         :type const: any class constructor
         :param dct: configuration of the class.
-        :type dct: dict
+        :type dct: dict or None
         '''
-        dct = dct or {}
-        
-        self._dct   = dct
+        self._conf  = dct or {}
         self._const = const
 
-    def build( self, dct ):
+    def build( self, dct = None ):
         '''
-        :param dct: configuration to build the class.
-        :type dct: dict
-        :returns: built class
+        :param dct: configuration to build the class. If None \
+        is provided, it is assumed that the stored configuration \
+        has the correct format i.e there are no other Config \
+        classes within it, or the constructor expects them.
+        :type dct: dict or None
+        :returns: built class.
         :rtype: built class type
         '''
-        return self._const(**dct)
+        if dct is None:
+            return self._const(**self._conf)
+        else:
+            return self._const(**dct)
 
-    def config( self ):
+    def conf( self ):
         '''
         :returns: configuration for the class in this object.
         :rtype: dict
         '''
-        return self._dct
+        return self._conf
 
     def full_name( self ):
         '''

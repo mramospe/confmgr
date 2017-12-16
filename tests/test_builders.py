@@ -50,18 +50,18 @@ def test_configmgr():
     # Generate a fake manager and save its configuration
     base = Config(A, {'arg': 1})
     
-    mgr = Config(B, {'arg1': base, 'arg2': 'name'})
+    der = Config(B, {'arg1': base, 'arg2': 'name'})
 
-    cfg = ConfMgr.from_config('manager', mgr)
+    cfg = ConfMgr.from_config('derived', der)
     
     path = './' + __fname__
     
     cfg.save(path)
 
-    # Build the configuration from the file and get the manager
+    # Build the configuration from the file and get the second class
     rcfg = ConfMgr.from_file(path)
     
-    mgr = rcfg.processed_config()['manager']
+    der = rcfg.proc_conf()['derived']
 
     os.remove(__fname__)
     
