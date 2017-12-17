@@ -9,4 +9,4 @@ The classes and functions allow to:
 - The configuration of the saved classes is then used to rebuild the same classes from the configuration file.
 - Some functions also allow to manage files with duplicated configuration.
 
-Find the full documentation for the package in the `confmgr GitHub Pages <https://mramospe.github.io/confmgr/>`.
+Find the full documentation for the package in the `GitHub Pages <https://mramospe.github.io/confmgr/>`_.
