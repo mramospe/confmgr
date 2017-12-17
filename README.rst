@@ -8,3 +8,5 @@ The classes and functions allow to:
 - Save a class constructor together with the arguments used to build it through the :class:`confmgr.Config` class.
 - The configuration of the saved classes is then used to rebuild the same classes from the configuration file.
 - Some functions also allow to manage files with duplicated configuration.
+
+Find the full documentation for the package in the `confmgr GitHub Pages <https://mramospe.github.io/confmgr/>`.
