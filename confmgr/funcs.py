@@ -15,7 +15,7 @@ from confmgr.core import ConfMgr, main_section_name
 __all__ = ['check_configurations', 'get_configurations']
 
 
-def _remove_elements( cfg, drop ):
+def _remove_elements( cfg, drop = None ):
     '''
     Remove the elements from the configuration given
     a dictionary.
@@ -23,24 +23,25 @@ def _remove_elements( cfg, drop ):
     :param cfg: input configuration.
     :type cfg: ConfMgr
     :param drop: "section, element" values to drop.
-    :type drop: dict
+    :type drop: dict(str, list(str)) or None
     :returns: dropped values as a new configuration.
     :rtype: ConfMgr()
     '''
     rm_cfg = ConfMgr()
 
-    for s, l in drop.iteritems():
+    if drop is not None:
+        for s, l in drop.iteritems():
 
-        tr = set(map(lambda i: i[0], cfg.items(s))) & set(l)
+            tr = set(map(lambda i: i[0], cfg.items(s))) & set(l)
         
-        if len(tr) > 0:
+            if len(tr) > 0:
             
-            rm_cfg.add_section(s)
+                rm_cfg.add_section(s)
             
-            for e in tr:
-                rm_cfg.set(s, e, cfg.get(s, e))
-                cfg.remove_option(s, e)
-
+                for e in tr:
+                    rm_cfg.set(s, e, cfg.get(s, e))
+                    cfg.remove_option(s, e)
+    
     return rm_cfg
 
 
