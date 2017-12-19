@@ -34,21 +34,21 @@ confs = zip(args.files, map(confmgr.ConfMgr.from_file, args.files))
 ic = 0
 while ic < len(confs):
 
-    cfg = confs[ic][1]
+    flst, cfgs = zip(*confs)
     
-    cfglst = zip(*confs)
+    c = cfgs[ic]
     
-    ms = confmgr.check_configurations(cfg, cfglst[1][ic + 1:], skip = args.skip)
+    ms = confmgr.check_configurations(c, cfgs[ic + 1:], skip = args.skip)
     
     if len(ms) > 0:
 
-        flst   = [confs[ic][0]]
-        remove = []
+        matches = [confs[ic][0]]
+        remove  = []
         for m in ms:
             
-            i = cfglst[1].index(m)
+            i = cfgs.index(m)
             
-            flst.append(cfglst[0][i])
+            matches.append(flst[i])
             
             remove.append(i)
 
@@ -56,8 +56,8 @@ while ic < len(confs):
             del confs[i]
 
         print '-- Found {} files with the same '\
-            'configuration: {}'.format(len(ms) + 1, flst)
+            'configuration: {}'.format(len(ms) + 1, matches)
         
-        print '--- Configuration:\n{}'.format(cfg)
+        print '--- Configuration:\n{}'.format(c)
 
     ic += 1
