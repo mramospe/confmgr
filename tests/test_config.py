@@ -12,10 +12,9 @@ import os
 
 # confmgr
 import confmgr
-from confmgr.core import main_section_name
 
 
-__fname__ = 'test_config.ini'
+__fname__ = 'test_config.xml'
 
 
 def _generate_and_check( func ):
@@ -32,12 +31,12 @@ def _generate_and_check( func ):
         Create the configuration file and read it, checking
         that the two versions match.
         '''
-        cfg = confmgr.ConfMgr.from_dict(func())
+        cfg = confmgr.ConfMgr(func())
         cfg.save(__fname__)
 
         read = confmgr.ConfMgr.from_file(__fname__)
 
-        matches = confmgr.check_configurations(cfg, [read], skip = {main_section_name(): ['int']})
+        matches = confmgr.check_configurations(cfg, [read])
 
         os.remove(__fname__)
 

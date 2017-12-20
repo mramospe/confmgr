@@ -9,7 +9,7 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 import os, re
 
 # confmgr
-from confmgr.core import ConfMgr, main_section_name
+from confmgr.core import ConfMgr
 
 
 __all__ = ['check_configurations', 'get_configurations']
@@ -33,15 +33,15 @@ def _remove_elements( cfg, drop = None ):
         for s, l in drop.iteritems():
 
             tr = set(map(lambda i: i[0], cfg.items(s))) & set(l)
-        
+
             if len(tr) > 0:
-            
+
                 rm_cfg.add_section(s)
-            
+
                 for e in tr:
                     rm_cfg.set(s, e, cfg.get(s, e))
                     cfg.remove_option(s, e)
-    
+
     return rm_cfg
 
 
@@ -63,9 +63,9 @@ def check_configurations( config, cfglst, skip = None ):
     :rtype: list(ConfMgr)
     '''
     rmd = [_remove_elements(c, skip) for c in cfglst]
-    
+
     r = _remove_elements(config, skip)
-    
+
     matches = []
     for cfg, rm in zip(cfglst, rmd):
 
@@ -75,7 +75,7 @@ def check_configurations( config, cfglst, skip = None ):
         cfg.update(rm)
 
     config.update(r)
-    
+
     return matches
 
 
@@ -83,7 +83,7 @@ def get_configurations( path, pattern ):
     '''
     Get the list of current configurations in "path"
     following the given pattern.
-    
+
     :param path: path to get the configurations from.
     :type path: str
     :param pattern: regex to filter the configurations.
@@ -92,10 +92,10 @@ def get_configurations( path, pattern ):
     :rtype: list(ConfMgr)
     '''
     comp = re.compile(pattern)
-    
+
     matches = [comp.match(f) for f in os.listdir(path)]
-    
+
     full_lst = [ConfMgr.from_file('{}/{}'.format(path, f.string))
                 for f in matches if f is not None]
-    
+
     return full_lst

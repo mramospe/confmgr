@@ -19,17 +19,17 @@ version_info = (0, 0, 0)
 version = '.'.join(map(str, version_info))
 
 # Setup function
-setup( 
-    
+setup(
+
     name = 'confmgr',
-    
+
     version = version,
-    
+
     description = 'Package to track MVA configurations using scikit-learn',
-    
+
     # Read the long description from the README
     long_description = open('README.rst').readlines(),
-    
+
     # Keywords to search for the package
     keywords = 'mva bdt hep',
 
@@ -40,11 +40,11 @@ setup(
     scripts = ['scripts/{}'.format(f) for f in os.listdir('scripts')],
 
     # Requisites
-    install_requires = ['configparser', 'matplotlib', 'numpy', 'pytest', 'scikit-learn'],
+    install_requires = ['matplotlib', 'numpy', 'pytest', 'scikit-learn'],
 
     # Test requirements
     setup_requires = ['pytest-runner'],
-    
+
     tests_require = ['pytest'],
     )
 

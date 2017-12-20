@@ -17,7 +17,7 @@ from sklearn.tree import DecisionTreeClassifier
 from confmgr import ConfMgr, Config
 
 
-__fname__ = 'test_config.ini'
+__fname__ = 'test_config.xml'
 
 
 class A:
@@ -49,20 +49,20 @@ def test_configmgr():
     '''
     # Generate a fake manager and save its configuration
     base = Config(A, {'arg': 1})
-    
+
     der = Config(B, {'arg1': base, 'arg2': 'name'})
 
-    cfg = ConfMgr.from_config('derived', der)
-    
+    cfg = ConfMgr({'derived': der})
+
     path = './' + __fname__
-    
+
     cfg.save(path)
 
     # Build the configuration from the file and get the second class
     rcfg = ConfMgr.from_file(path)
-    
+
     der = rcfg.proc_conf()['derived']
 
     os.remove(__fname__)
-    
+
     assert cfg == rcfg
