@@ -87,13 +87,14 @@ class ConfMgr(dict):
         '''
         return not self.__eq__(other)
 
-#    def __str__( self ):
+    def __str__( self, indent = 0 ):
         '''
-        This class is displayed showing separately each section.
-        '''
- #       return self._str()
+        Represent this class as a string, using the given indentation level.
+        The latter is meant for internal use only.
 
-    def _str( self, indent = 0 ):
+        :param indent: indentation level.
+        :type indent: int
+        '''
         out = '\n'
 
         maxl = max(map(len, self.keys()))
@@ -104,16 +105,27 @@ class ConfMgr(dict):
             frmt = '{:<{}}'.format(k, maxl)
 
             if isinstance(v, Config):
-                lines.append('{} = ('.format(frmt))
-                lines.append(v._conf._str(indent + 5))
+                lines.append('{:>{}} = ('.format(frmt, indent))
+                lines.append(v._conf.__str__(indent + 5))
                 lines.append('{:>{}}'.format(')', indent + 6))
             else:
-                lines.append('{:>{}} = {}'.format(frmt, v))
+                lines.append('{:>{}} = {}'.format(frmt, indent + 5, v))
 
         return '\n'.join(lines)
 
     def _create_xml_node( self, root, name, value ):
+        '''
+        Create an XML element in the given root.
 
+        :param root: XML element to write into.
+        :type root: xml.etree.cElementTree.Element
+        :param name: name of the new element.
+        :type name: str
+        :param value: object to write. It can be either a Config object \
+        or a class with a string representation.
+
+        .. seealso: :meth:`ConfMgr._from_xml_node`
+        '''
         if isinstance(value, Config):
 
             el = et.SubElement(root, _class_path(value._const), name = name)
@@ -126,7 +138,18 @@ class ConfMgr(dict):
 
     @classmethod
     def _from_xml_node( cls, node ):
+        '''
+        Extract the information from a XML node. If the node represents
+        an object, then a Config object is built with its constructor
+        and configuration. Otherwise an "eval" call is done. If it fails,
+        the raw string is saved.
 
+        :param cls: object constructor.
+        :type cls: this class constructor.
+        :param node: XML node to process.
+        :type node: xml.etree.cElementTree.Element
+        :returns: saved class as a python object.
+        '''
         children = node.getchildren()
 
         if children:
@@ -210,14 +233,20 @@ class Config:
     Class to store any class constructor plus its
     configuration.
     '''
-    def __init__( self, const, dct = None ):
+    def __init__( self, const, conf = None ):
         '''
+        The input configuration in "conf" is saved as a ConfMgr object,
+        to ensure that the :meth:`Config.build` method works properly.
+        This does not make any copy of the internal classes in "conf".
+
         :param const: constructor of the configurable class.
         :type const: any class constructor
-        :param dct: configuration of the class.
-        :type dct: dict or None
+        :param conf: configuration of the class.
+        :type conf: dict or None
+
+        .. seealso: :meth:`Config.build`
         '''
-        self._conf  = dct or {}
+        self._conf  = ConfMgr(conf or {})
         self._const = const
 
     def __eq__( self, other ):
@@ -240,20 +269,14 @@ class Config:
         '''
         return not self.__eq__(other)
 
-    def build( self, dct = None ):
+    def build( self ):
         '''
-        :param dct: configuration to build the class. If None \
-        is provided, it is assumed that the stored configuration \
-        has the correct format i.e there are no other Config \
-        classes within it, or the constructor expects them.
-        :type dct: dict or None
+        Return a class using the stored constructor and configuration.
+
         :returns: built class.
         :rtype: built class type
         '''
-        if dct is None:
-            return self._const(**self._conf)
-        else:
-            return self._const(**dct)
+        return self._const(**self._conf.proc_conf())
 
     def conf( self ):
         '''
@@ -262,11 +285,9 @@ class Config:
         '''
         return self._conf
 
-    def full_name( self ):
+    def const( self ):
         '''
-        :returns: full name of the class attached to \
-        this configurable.
-        :rtype: str
+        :returns: constructor for the class in this object.
+        :rtype: class constructor
         '''
-        cl = self._const
-        return '{}.{}'.format(cl.__module__, cl.__name__)
+        return self._const
