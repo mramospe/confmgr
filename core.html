@@ -80,7 +80,7 @@
 
 <dl class="attribute">
 <dt id="confmgr.core.ConfMgr.__dict__">
-<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '__ne__': &lt;function __ne__&gt;, '__module__': 'confmgr.core', 'proc_conf': &lt;function proc_conf&gt;, '__weakref__': &lt;attribute '__weakref__' of 'ConfMgr' objects&gt;, '_str': &lt;function _str&gt;, '_create_xml_node': &lt;function _create_xml_node&gt;, '_from_xml_node': &lt;classmethod object&gt;, '__dict__': &lt;attribute '__dict__' of 'ConfMgr' objects&gt;, 'save': &lt;function save&gt;, '__eq__': &lt;function __eq__&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '__ne__': &lt;function __ne__&gt;, '__module__': 'confmgr.core', 'proc_conf': &lt;function proc_conf&gt;, '__weakref__': &lt;attribute '__weakref__' of 'ConfMgr' objects&gt;, '__str__': &lt;function __str__&gt;, '_create_xml_node': &lt;function _create_xml_node&gt;, '_from_xml_node': &lt;classmethod object&gt;, '__dict__': &lt;attribute '__dict__' of 'ConfMgr' objects&gt;, 'save': &lt;function save&gt;, '__eq__': &lt;function __eq__&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -224,10 +224,20 @@
 <code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; size of D in memory, in bytes<a class="headerlink" href="#confmgr.core.ConfMgr.__sizeof__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="confmgr.core.ConfMgr.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">__str__</code><span class="sig-paren">(</span><em>indent=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent this class as a string, using the given indentation level.
+The latter is meant for internal use only.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – indentation level.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.__subclasshook__">
@@ -391,7 +401,7 @@ In either case, this is followed by: for k in F: D[k] = F[k]</p>
 
 <dl class="class">
 <dt id="confmgr.core.Config">
-<em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">Config</code><span class="sig-paren">(</span><em>const</em>, <em>dct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">Config</code><span class="sig-paren">(</span><em>const</em>, <em>conf=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to store any class constructor plus its
 configuration.</p>
 <dl class="method">
@@ -413,14 +423,17 @@ configuration.</p>
 
 <dl class="method">
 <dt id="confmgr.core.Config.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>const</em>, <em>dct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>const</em>, <em>conf=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The input configuration in “conf” is saved as a ConfMgr object,
+to ensure that the <a class="reference internal" href="#confmgr.core.Config.build" title="confmgr.core.Config.build"><code class="xref py py-meth docutils literal"><span class="pre">Config.build()</span></code></a> method works properly.
+This does not make any copy of the internal classes in “conf”.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>const</strong> (<em>any class constructor</em>) – constructor of the configurable class.</li>
-<li><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – configuration of the class.</li>
+<li><strong>conf</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – configuration of the class.</li>
 </ul>
 </td>
 </tr>
@@ -452,16 +465,15 @@ configuration.</p>
 
 <dl class="method">
 <dt id="confmgr.core.Config.build">
-<code class="descname">build</code><span class="sig-paren">(</span><em>dct=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.build" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a class using the stored constructor and configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dct</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – configuration to build the class. If None         is provided, it is assumed that the stored configuration         has the correct format i.e there are no other Config         classes within it, or the constructor expects them.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">built class.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">built class.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">built class type</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">built class type</td>
 </tr>
 </tbody>
 </table>
@@ -483,15 +495,15 @@ configuration.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="confmgr.core.Config.full_name">
-<code class="descname">full_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.full_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.full_name" title="Permalink to this definition">¶</a></dt>
+<dt id="confmgr.core.Config.const">
+<code class="descname">const</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.const"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.const" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">full name of the class attached to         this configurable.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">constructor for the class in this object.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">class constructor</td>
 </tr>
 </tbody>
 </table>

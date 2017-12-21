@@ -127,15 +127,16 @@
 <span class="sd">        :returns: comparison decision.</span>
 <span class="sd">        :rtype: bool</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
-<span class="c1">#    def __str__( self ):</span>
+<div class="viewcode-block" id="ConfMgr.__str__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        This class is displayed showing separately each section.</span>
-<span class="sd">        &#39;&#39;&#39;</span></div>
- <span class="c1">#       return self._str()</span>
+<span class="sd">        Represent this class as a string, using the given indentation level.</span>
+<span class="sd">        The latter is meant for internal use only.</span>
 
-    <span class="k">def</span> <span class="nf">_str</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
+<span class="sd">        :param indent: indentation level.</span>
+<span class="sd">        :type indent: int</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
 
         <span class="n">maxl</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
@@ -146,16 +147,27 @@
             <span class="n">frmt</span> <span class="o">=</span> <span class="s1">&#39;{:&lt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">maxl</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
-                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{} = (&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">))</span>
-                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_conf</span><span class="o">.</span><span class="n">_str</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">))</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = (&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">indent</span><span class="p">))</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_conf</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">))</span>
                 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">6</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_create_xml_node</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create an XML element in the given root.</span>
 
+<span class="sd">        :param root: XML element to write into.</span>
+<span class="sd">        :type root: xml.etree.cElementTree.Element</span>
+<span class="sd">        :param name: name of the new element.</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param value: object to write. It can be either a Config object \</span>
+<span class="sd">        or a class with a string representation.</span>
+
+<span class="sd">        .. seealso: :meth:`ConfMgr._from_xml_node`</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
 
             <span class="n">el</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">_class_path</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">_const</span><span class="p">),</span> <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">)</span>
@@ -168,7 +180,18 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_xml_node</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">node</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Extract the information from a XML node. If the node represents</span>
+<span class="sd">        an object, then a Config object is built with its constructor</span>
+<span class="sd">        and configuration. Otherwise an &quot;eval&quot; call is done. If it fails,</span>
+<span class="sd">        the raw string is saved.</span>
 
+<span class="sd">        :param cls: object constructor.</span>
+<span class="sd">        :type cls: this class constructor.</span>
+<span class="sd">        :param node: XML node to process.</span>
+<span class="sd">        :type node: xml.etree.cElementTree.Element</span>
+<span class="sd">        :returns: saved class as a python object.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">children</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
@@ -252,14 +275,20 @@
 <span class="sd">    Class to store any class constructor plus its</span>
 <span class="sd">    configuration.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="Config.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">dct</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        The input configuration in &quot;conf&quot; is saved as a ConfMgr object,</span>
+<span class="sd">        to ensure that the :meth:`Config.build` method works properly.</span>
+<span class="sd">        This does not make any copy of the internal classes in &quot;conf&quot;.</span>
+
 <span class="sd">        :param const: constructor of the configurable class.</span>
 <span class="sd">        :type const: any class constructor</span>
-<span class="sd">        :param dct: configuration of the class.</span>
-<span class="sd">        :type dct: dict or None</span>
+<span class="sd">        :param conf: configuration of the class.</span>
+<span class="sd">        :type conf: dict or None</span>
+
+<span class="sd">        .. seealso: :meth:`Config.build`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span>  <span class="o">=</span> <span class="n">dct</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span>  <span class="o">=</span> <span class="n">ConfMgr</span><span class="p">(</span><span class="n">conf</span> <span class="ow">or</span> <span class="p">{})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_const</span> <span class="o">=</span> <span class="n">const</span></div>
 
 <div class="viewcode-block" id="Config.__eq__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
@@ -282,20 +311,14 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Config.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">dct</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :param dct: configuration to build the class. If None \</span>
-<span class="sd">        is provided, it is assumed that the stored configuration \</span>
-<span class="sd">        has the correct format i.e there are no other Config \</span>
-<span class="sd">        classes within it, or the constructor expects them.</span>
-<span class="sd">        :type dct: dict or None</span>
+<span class="sd">        Return a class using the stored constructor and configuration.</span>
+
 <span class="sd">        :returns: built class.</span>
 <span class="sd">        :rtype: built class type</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="n">dct</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_conf</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="n">dct</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_conf</span><span class="o">.</span><span class="n">proc_conf</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Config.conf"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.conf">[docs]</a>    <span class="k">def</span> <span class="nf">conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -304,14 +327,12 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conf</span></div>
 
-<div class="viewcode-block" id="Config.full_name"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.full_name">[docs]</a>    <span class="k">def</span> <span class="nf">full_name</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.const"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.const">[docs]</a>    <span class="k">def</span> <span class="nf">const</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :returns: full name of the class attached to \</span>
-<span class="sd">        this configurable.</span>
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :returns: constructor for the class in this object.</span>
+<span class="sd">        :rtype: class constructor</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">cl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span>
-        <span class="k">return</span> <span class="s1">&#39;{}.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cl</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">cl</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span></div></div>
 </pre></div>
 
           </div>
