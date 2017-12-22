@@ -86,13 +86,14 @@ class ConfDict(dict):
         lines = []
         for k, v in self.iteritems():
 
-            frmt = '{:<{}}'.format(k, maxl)
+            frmt = k.ljust(maxl)
+
+            ind = indent + maxl
 
             if isinstance(v, Config):
-                lines.append('{:>{}} = {}'.format(frmt, indent,
-                                                  v.__str__(indent + 5)))
+                lines.append('{:>{}} = {}'.format(frmt, ind, v.__str__(ind)))
             else:
-                lines.append('{:>{}} = {}'.format(frmt, indent + 5, v))
+                lines.append('{:>{}} = {}'.format(frmt, ind, v))
 
         return '\n'.join(lines)
 
