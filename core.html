@@ -47,7 +47,7 @@
 <dl class="class">
 <dt id="confmgr.core.ConfMgr">
 <em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">ConfMgr</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">confmgr.core.ConfDict</span></code></p>
 <p>Class to manage configurations built using the
 <a class="reference internal" href="#confmgr.core.Config" title="confmgr.core.Config"><code class="xref py py-class docutils literal"><span class="pre">Config</span></code></a> class.</p>
 <dl class="attribute">
@@ -80,12 +80,12 @@
 
 <dl class="attribute">
 <dt id="confmgr.core.ConfMgr.__dict__">
-<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '__ne__': &lt;function __ne__&gt;, '__module__': 'confmgr.core', 'proc_conf': &lt;function proc_conf&gt;, '__weakref__': &lt;attribute '__weakref__' of 'ConfMgr' objects&gt;, '__str__': &lt;function __str__&gt;, '_create_xml_node': &lt;function _create_xml_node&gt;, '_from_xml_node': &lt;classmethod object&gt;, '__dict__': &lt;attribute '__dict__' of 'ConfMgr' objects&gt;, 'save': &lt;function save&gt;, '__eq__': &lt;function __eq__&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__dict__</code><em class="property"> = dict_proxy({'from_file': &lt;classmethod object&gt;, '_create_xml_node': &lt;function _create_xml_node&gt;, '__module__': 'confmgr.core', '_from_xml_node': &lt;classmethod object&gt;, 'save': &lt;function save&gt;, '__doc__': '\n    Class to manage configurations built using the\n    :class:`Config` class.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.ConfMgr.__dict__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.__eq__">
-<code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__eq__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__eq__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -138,7 +138,7 @@
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class is constructed as a dictionary.</p>
+<dd><p>This class is constructed as a configuration dictionary.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -170,7 +170,7 @@
 
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.__ne__">
-<code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__ne__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__ne__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__ne__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -226,14 +226,19 @@
 
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.__str__">
-<code class="descname">__str__</code><span class="sig-paren">(</span><em>indent=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represent this class as a string, using the given indentation level.
-The latter is meant for internal use only.</p>
+<code class="descname">__str__</code><span class="sig-paren">(</span><em>indent=0</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent this class as a string, using the given
+indentation level. The latter is meant for internal
+use only.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – indentation level.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">this class as a string.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -338,7 +343,7 @@ overrides the normal algorithm (and the outcome is cached).</p>
 
 <dl class="method">
 <dt id="confmgr.core.ConfMgr.proc_conf">
-<code class="descname">proc_conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.proc_conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.proc_conf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">proc_conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.ConfMgr.proc_conf" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -401,9 +406,42 @@ In either case, this is followed by: for k in F: D[k] = F[k]</p>
 
 <dl class="class">
 <dt id="confmgr.core.Config">
-<em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">Config</code><span class="sig-paren">(</span><em>const</em>, <em>conf=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to store any class constructor plus its
-configuration.</p>
+<em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">Config</code><span class="sig-paren">(</span><em>const</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">confmgr.core.ConfDict</span></code></p>
+<p>Class to store any class constructor plus its configuration.</p>
+<dl class="attribute">
+<dt id="confmgr.core.Config.__class__">
+<code class="descname">__class__</code><a class="headerlink" href="#confmgr.core.Config.__class__" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#type" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__cmp__">
+<code class="descname">__cmp__</code><a class="headerlink" href="#confmgr.core.Config.__cmp__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span> &#x2192; True if D has a key k, else False<a class="headerlink" href="#confmgr.core.Config.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#confmgr.core.Config.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(‘name’) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__delitem__">
+<code class="descname">__delitem__</code><a class="headerlink" href="#confmgr.core.Config.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delitem__(y) &lt;==&gt; del x[y]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__dict__">
+<code class="descname">__dict__</code><em class="property"> = dict_proxy({'__module__': 'confmgr.core', 'const': &lt;function const&gt;, 'build': &lt;function build&gt;, '__str__': &lt;function __str__&gt;, '__eq__': &lt;function __eq__&gt;, '__doc__': '\n    Class to store any class constructor plus its configuration.\n    ', '__init__': &lt;function __init__&gt;})</em><a class="headerlink" href="#confmgr.core.Config.__dict__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="confmgr.core.Config.__eq__">
 <code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__eq__" title="Permalink to this definition">¶</a></dt>
@@ -422,8 +460,43 @@ configuration.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="confmgr.core.Config.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__ge__">
+<code class="descname">__ge__</code><a class="headerlink" href="#confmgr.core.Config.__ge__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__ge__(y) &lt;==&gt; x&gt;=y</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#confmgr.core.Config.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(‘name’) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getitem__(y) &lt;==&gt; x[y]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__gt__">
+<code class="descname">__gt__</code><a class="headerlink" href="#confmgr.core.Config.__gt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__gt__(y) &lt;==&gt; x&gt;y</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__hash__">
+<code class="descname">__hash__</code><em class="property"> = None</em><a class="headerlink" href="#confmgr.core.Config.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="confmgr.core.Config.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>const</em>, <em>conf=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>const</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>The input configuration in “conf” is saved as a ConfMgr object,
 to ensure that the <a class="reference internal" href="#confmgr.core.Config.build" title="confmgr.core.Config.build"><code class="xref py py-meth docutils literal"><span class="pre">Config.build()</span></code></a> method works properly.
 This does not make any copy of the internal classes in “conf”.</p>
@@ -433,12 +506,35 @@ This does not make any copy of the internal classes in “conf”.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>const</strong> (<em>any class constructor</em>) – constructor of the configurable class.</li>
-<li><strong>conf</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – configuration of the class.</li>
+<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) – arguments to <code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code>.</li>
+<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – keyword arguments to <code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code>.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__iter__">
+<code class="descname">__iter__</code><a class="headerlink" href="#confmgr.core.Config.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__le__">
+<code class="descname">__le__</code><a class="headerlink" href="#confmgr.core.Config.__le__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__le__(y) &lt;==&gt; x&lt;=y</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__len__">
+<code class="descname">__len__</code><a class="headerlink" href="#confmgr.core.Config.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__lt__">
+<code class="descname">__lt__</code><a class="headerlink" href="#confmgr.core.Config.__lt__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__lt__(y) &lt;==&gt; x&lt;y</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -448,12 +544,12 @@ This does not make any copy of the internal classes in “conf”.</p>
 
 <dl class="method">
 <dt id="confmgr.core.Config.__ne__">
-<code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__ne__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__ne__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.__ne__" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<a class="reference internal" href="#confmgr.core.Config" title="confmgr.core.Config"><em>Config</em></a>) – another configurable to compare.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> (<a class="reference internal" href="#confmgr.core.ConfMgr" title="confmgr.core.ConfMgr"><em>ConfMgr</em></a>) – another configuration to compare.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">comparison decision.</td>
 </tr>
@@ -464,9 +560,82 @@ This does not make any copy of the internal classes in “conf”.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="confmgr.core.Config.__new__">
+<code class="descname">__new__</code><span class="sig-paren">(</span><em>S</em>, <em>...</em><span class="sig-paren">)</span> &#x2192; a new object with type S, a subtype of T<a class="headerlink" href="#confmgr.core.Config.__new__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__repr__">
+<code class="descname">__repr__</code><a class="headerlink" href="#confmgr.core.Config.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#confmgr.core.Config.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(‘name’, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__setitem__">
+<code class="descname">__setitem__</code><a class="headerlink" href="#confmgr.core.Config.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setitem__(i, y) &lt;==&gt; x[i]=y</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; size of D in memory, in bytes<a class="headerlink" href="#confmgr.core.Config.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><em>indent=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the default <code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__str__()</span></code> method,
+displaying as well the information of the class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">this class as a string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.__subclasshook__">
+<code class="descname">__subclasshook__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.__subclasshook__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract classes can override this to customize issubclass().</p>
+<p>This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="confmgr.core.Config.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#confmgr.core.Config.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="confmgr.core.Config.build">
 <code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.build" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a class using the stored constructor and configuration.</p>
+<dd><p>Return a class using the stored constructor and
+configuration.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -480,19 +649,9 @@ This does not make any copy of the internal classes in “conf”.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="confmgr.core.Config.conf">
-<code class="descname">conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#Config.conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.Config.conf" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">configuration for the class in this object.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dt id="confmgr.core.Config.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None.  Remove all items from D.<a class="headerlink" href="#confmgr.core.Config.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="confmgr.core.Config.const">
@@ -508,6 +667,112 @@ This does not make any copy of the internal classes in “conf”.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; a shallow copy of D<a class="headerlink" href="#confmgr.core.Config.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.fromkeys">
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><em>S</em><span class="optional">[</span>, <em>v</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; New dict with keys from S and values equal to v.<a class="headerlink" href="#confmgr.core.Config.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>v defaults to None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; D[k] if k in D, else d.  d defaults to None.<a class="headerlink" href="#confmgr.core.Config.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.has_key">
+<code class="descname">has_key</code><span class="sig-paren">(</span><em>k</em><span class="sig-paren">)</span> &#x2192; True if D has a key k, else False<a class="headerlink" href="#confmgr.core.Config.has_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list of D's (key, value) pairs, as 2-tuples<a class="headerlink" href="#confmgr.core.Config.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.iteritems">
+<code class="descname">iteritems</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an iterator over the (key, value) items of D<a class="headerlink" href="#confmgr.core.Config.iteritems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.iterkeys">
+<code class="descname">iterkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an iterator over the keys of D<a class="headerlink" href="#confmgr.core.Config.iterkeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.itervalues">
+<code class="descname">itervalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an iterator over the values of D<a class="headerlink" href="#confmgr.core.Config.itervalues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list of D's keys<a class="headerlink" href="#confmgr.core.Config.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; v, remove specified key and return the corresponding value.<a class="headerlink" href="#confmgr.core.Config.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>If key is not found, d is returned if given, otherwise KeyError is raised</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.popitem">
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; (k, v), remove and return some (key, value) pair as a<a class="headerlink" href="#confmgr.core.Config.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>2-tuple; but raise KeyError if D is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.proc_conf">
+<code class="descname">proc_conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#confmgr.core.Config.proc_conf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary, where         all the built classes are saved.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.setdefault">
+<code class="descname">setdefault</code><span class="sig-paren">(</span><em>k</em><span class="optional">[</span>, <em>d</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; D.get(k,d), also set D[k]=d if k not in D<a class="headerlink" href="#confmgr.core.Config.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &#x2192; None.  Update D from dict/iterable E and F.<a class="headerlink" href="#confmgr.core.Config.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+In either case, this is followed by: for k in F: D[k] = F[k]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list of D's values<a class="headerlink" href="#confmgr.core.Config.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.viewitems">
+<code class="descname">viewitems</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; a set-like object providing a view on D's items<a class="headerlink" href="#confmgr.core.Config.viewitems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.viewkeys">
+<code class="descname">viewkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; a set-like object providing a view on D's keys<a class="headerlink" href="#confmgr.core.Config.viewkeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="confmgr.core.Config.viewvalues">
+<code class="descname">viewvalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; an object providing a view on D's values<a class="headerlink" href="#confmgr.core.Config.viewvalues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
