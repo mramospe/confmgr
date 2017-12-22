@@ -78,9 +78,9 @@ class ConfDict(dict):
 
         :param indent: indentation level.
         :type indent: int
+        :returns: this class as a string.
+        :rtype: str
         '''
-        out = '\n'
-
         maxl = max(map(len, self.keys()))
 
         lines = []
@@ -89,9 +89,8 @@ class ConfDict(dict):
             frmt = '{:<{}}'.format(k, maxl)
 
             if isinstance(v, Config):
-                lines.append('{:>{}} = ('.format(frmt, indent))
-                lines.append(v.__str__(indent + 5))
-                lines.append('{:>{}}'.format(')', indent + 6))
+                lines.append('{:>{}} = {}'.format(frmt, indent,
+                                                  v.__str__(indent + 5)))
             else:
                 lines.append('{:>{}} = {}'.format(frmt, indent + 5, v))
 
@@ -218,9 +217,6 @@ class ConfMgr(ConfDict):
         extension is recomended).
         :type path: str
         '''
-        print 'INFO: Generate new configuration file "{}"'\
-            ''.format(path)
-
         root = et.Element(_class_path(self.__class__))
 
         for k, v in self.iteritems():
@@ -264,6 +260,20 @@ class Config(ConfDict):
         m_c = (self._const == other._const)
 
         return m_c and ConfDict.__eq__(self, other)
+
+    def __str__( self, indent = 0 ):
+        '''
+        Override the default :meth:`ConfDict.__str__` method,
+        displaying as well the information of the class.
+
+        :returns: this class as a string.
+        :rtype: str
+        '''
+        return '\n'.join(l for l in (
+            '{}('.format(self._const.__name__),
+            ConfDict.__str__(self, indent),
+            ')'.rjust(indent + 1)
+        ))
 
     def build( self ):
         '''
