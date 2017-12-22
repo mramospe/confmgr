@@ -84,3 +84,17 @@ def test_class_config():
         'int'    : 1,
         'float'  : 0.1
         }
+
+
+@_generate_and_check
+def test_empty_class():
+    '''
+    Test a configuration with a class constructor
+    being called with no arguments.
+    '''
+    return {
+        'string' : 'this is a test',
+        'object' : confmgr.Config(ttcl),
+        'int'    : 1,
+        'float'  : 0.1
+        }

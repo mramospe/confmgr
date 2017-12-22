@@ -25,41 +25,9 @@ def _class_path( const ):
     return '{}.{}'.format(const.__module__, const.__name__)
 
 
-def _matching_dicts( first, second ):
+class ConfDict(dict):
     '''
-    Define the way to match to dictionaries. Returns True
-    if the two dictionaries have the same structure (but the
-    keys can have arbitrary order).
-
-    :param first: first dictionary.
-    :type first: dict
-    :param second: second dictionary.
-    :type second: dict
-    :returns: comparison decision.
-    :rtype: bool
-    '''
-    if len(first) == len(second):
-
-        for k, v in first.iteritems():
-
-            if k in second:
-                if v == second[k]:
-                    continue
-
-            # A key or value does not match
-            return False
-    else:
-        # Lengths are different
-        return False
-
-    # Everything went fine
-    return True
-
-
-class ConfMgr(dict):
-    '''
-    Class to manage configurations built using the
-    :class:`Config` class.
+    Base class for the configurable classes.
     '''
     def __init__( self, *args, **kwargs ):
         '''
@@ -76,7 +44,22 @@ class ConfMgr(dict):
         :returns: comparison decision.
         :rtype: bool
         '''
-        return _matching_dicts(self, other)
+        if len(self) == len(other):
+
+            for k, v in self.iteritems():
+
+                if k in other:
+                    if v == other[k]:
+                        continue
+
+                # A key or value does not match
+                return False
+        else:
+            # Lengths are different
+            return False
+
+        # Everything went fine
+        return True
 
     def __ne__( self, other ):
         '''
@@ -89,8 +72,9 @@ class ConfMgr(dict):
 
     def __str__( self, indent = 0 ):
         '''
-        Represent this class as a string, using the given indentation level.
-        The latter is meant for internal use only.
+        Represent this class as a string, using the given
+        indentation level. The latter is meant for internal
+        use only.
 
         :param indent: indentation level.
         :type indent: int
@@ -106,12 +90,41 @@ class ConfMgr(dict):
 
             if isinstance(v, Config):
                 lines.append('{:>{}} = ('.format(frmt, indent))
-                lines.append(v._conf.__str__(indent + 5))
+                lines.append(v.__str__(indent + 5))
                 lines.append('{:>{}}'.format(')', indent + 6))
             else:
                 lines.append('{:>{}} = {}'.format(frmt, indent + 5, v))
 
         return '\n'.join(lines)
+
+    def proc_conf( self ):
+        '''
+        :returns: processed configuration dictionary, where \
+        all the built classes are saved.
+        :rtype: dict
+        '''
+        cfg = {}
+        for k, v in self.iteritems():
+            if isinstance(v, Config):
+                cfg[k] = v.build()
+            else:
+                cfg[k] = v
+
+        return cfg
+
+
+class ConfMgr(ConfDict):
+    '''
+    Class to manage configurations built using the
+    :class:`Config` class.
+    '''
+    def __init__( self, *args, **kwargs ):
+        '''
+        This class is constructed as a configuration dictionary.
+
+        .. seealso: :meth:`ConfDict.__init__`
+        '''
+        ConfDict.__init__(self, *args, **kwargs)
 
     def _create_xml_node( self, root, name, value ):
         '''
@@ -130,11 +143,14 @@ class ConfMgr(dict):
 
             el = et.SubElement(root, _class_path(value._const), name = name)
 
-            for k, v in value._conf.iteritems():
-                self._create_xml_node(el, k, v)
+            kwels = et.SubElement(el, 'kwargs')
+            for k, v in value.iteritems():
+                self._create_xml_node(kwels, k, v)
         else:
             el = et.SubElement(root, _class_path(value.__class__), name = name)
             el.text = str(value)
+
+        return el
 
     @classmethod
     def _from_xml_node( cls, node ):
@@ -154,7 +170,9 @@ class ConfMgr(dict):
 
         if children:
 
-            d = cls((c.get('name'), cls._from_xml_node(c)) for c in children)
+            kwels = children[0]
+            d = cls((c.get('name'), cls._from_xml_node(c))
+                    for c in kwels.getchildren())
 
             path = node.tag
 
@@ -194,21 +212,6 @@ class ConfMgr(dict):
         return cls((c.get('name'), cls._from_xml_node(c))
                    for c in root.getchildren())
 
-    def proc_conf( self ):
-        '''
-        :returns: processed configuration dictionary, where \
-        all the built classes are saved.
-        :rtype: dict
-        '''
-        cfg = {}
-        for k, v in self.iteritems():
-            if isinstance(v, Config):
-                cfg[k] = v.build()
-            else:
-                cfg[k] = v
-
-        return cfg
-
     def save( self, path ):
         '''
         :param path: path to the output file (adding the '.xml' \
@@ -228,12 +231,11 @@ class ConfMgr(dict):
         tree.write(path)
 
 
-class Config:
+class Config(ConfDict):
     '''
-    Class to store any class constructor plus its
-    configuration.
+    Class to store any class constructor plus its configuration.
     '''
-    def __init__( self, const, conf = None ):
+    def __init__( self, const, *args, **kwargs ):
         '''
         The input configuration in "conf" is saved as a ConfMgr object,
         to ensure that the :meth:`Config.build` method works properly.
@@ -241,12 +243,15 @@ class Config:
 
         :param const: constructor of the configurable class.
         :type const: any class constructor
-        :param conf: configuration of the class.
-        :type conf: dict or None
+        :param args: arguments to :meth:`ConfDict.__init__`.
+        :type args: tuple
+        :param kwargs: keyword arguments to :meth:`ConfDict.__init__`.
+        :type kwargs: dict
 
         .. seealso: :meth:`Config.build`
         '''
-        self._conf  = ConfMgr(conf or {})
+        ConfDict.__init__(self, *args, **kwargs)
+
         self._const = const
 
     def __eq__( self, other ):
@@ -258,32 +263,17 @@ class Config:
         '''
         m_c = (self._const == other._const)
 
-        return m_c and _matching_dicts(self._conf, other._conf)
-
-    def __ne__( self, other ):
-        '''
-        :param other: another configurable to compare.
-        :type other: Config
-        :returns: comparison decision.
-        :rtype: bool
-        '''
-        return not self.__eq__(other)
+        return m_c and ConfDict.__eq__(self, other)
 
     def build( self ):
         '''
-        Return a class using the stored constructor and configuration.
+        Return a class using the stored constructor and
+        configuration.
 
         :returns: built class.
         :rtype: built class type
         '''
-        return self._const(**self._conf.proc_conf())
-
-    def conf( self ):
-        '''
-        :returns: configuration for the class in this object.
-        :rtype: dict
-        '''
-        return self._conf
+        return self._const(**self.proc_conf())
 
     def const( self ):
         '''

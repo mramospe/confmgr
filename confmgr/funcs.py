@@ -15,36 +15,6 @@ from confmgr.core import ConfMgr
 __all__ = ['check_configurations', 'get_configurations']
 
 
-def _remove_elements( cfg, drop = None ):
-    '''
-    Remove the elements from the configuration given
-    a dictionary.
-
-    :param cfg: input configuration.
-    :type cfg: ConfMgr
-    :param drop: "section, element" values to drop.
-    :type drop: dict(str, list(str)) or None
-    :returns: dropped values as a new configuration.
-    :rtype: ConfMgr()
-    '''
-    rm_cfg = ConfMgr()
-
-    if drop is not None:
-        for s, l in drop.iteritems():
-
-            tr = set(map(lambda i: i[0], cfg.items(s))) & set(l)
-
-            if len(tr) > 0:
-
-                rm_cfg.add_section(s)
-
-                for e in tr:
-                    rm_cfg.set(s, e, cfg.get(s, e))
-                    cfg.remove_option(s, e)
-
-    return rm_cfg
-
-
 def check_configurations( config, cfglst, skip = None ):
     '''
     Check in the given set of configuration manager if
@@ -62,9 +32,9 @@ def check_configurations( config, cfglst, skip = None ):
     :returns: list of configurations matching the input.
     :rtype: list(ConfMgr)
     '''
-    rmd = [_remove_elements(c, skip) for c in cfglst]
+    rmd = [ConfMgr(_drop(c, skip)) for c in cfglst]
 
-    r = _remove_elements(config, skip)
+    r = ConfMgr(_drop(config, skip))
 
     matches = []
     for cfg, rm in zip(cfglst, rmd):
@@ -77,6 +47,32 @@ def check_configurations( config, cfglst, skip = None ):
     config.update(r)
 
     return matches
+
+
+def _drop( dct, drop = None ):
+    '''
+    Drop the information at the paths specified by the given
+    dictionary.
+    :param dct: input dictionary.
+    :type dct: dict
+    :param drop: information to drop.
+    :type drop: dict or None
+    :returns: dropped configuration.
+    :rtype: ConfMgr
+    '''
+    drop = drop or {}
+
+    out = ConfMgr()
+    for c in dct.viewkeys() & drop.viewkeys():
+
+        obj = drop[c]
+        if obj is not None:
+            # It is assumed to be a dictionary
+            out[c] = _drop(dct[c], obj)
+        else:
+            out[c] = dct.pop(c)
+
+    return out
 
 
 def get_configurations( path, pattern ):
