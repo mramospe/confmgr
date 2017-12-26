@@ -11,7 +11,7 @@ import importlib, inspect
 import xml.etree.cElementTree as et
 
 
-__all__ = ['ConfMgr', 'Config', 'config_builder']
+__all__ = ['ConfDict', 'ConfMgr', 'ConfObj', 'Config', 'config_builder']
 
 
 class config_builder:
