@@ -337,9 +337,9 @@ class Config(ConfObj):
     False
 
     .. note::
-    It is highly recommended to work with keyword arguments, since
-    it is the only way to quarantee a good behaviour of the equivalence
-    operators.
+       It is highly recommended to work with keyword arguments, since \
+       it is the only way to quarantee a good behaviour of the equivalence \
+       operators.
     '''
     def __init__( self, const, *args, **kwargs ):
         '''
