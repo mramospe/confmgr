@@ -45,6 +45,20 @@ def _generate_and_check( func ):
     return wrapper
 
 
+def test_config_equivalence():
+    '''
+    Check the equivalence behaviour of the Config class.
+    '''
+    class dummy:
+        def __init__( self, a, b ):
+            pass
+
+    c1 = confmgr.Config(dummy, 1, 0)
+    c2 = confmgr.Config(dummy, 1, b = 0)
+
+    assert c1 != c2
+
+
 @_generate_and_check
 def test_basic_config():
     '''
@@ -78,9 +92,9 @@ def test_class_config():
     return {
         'string' : 'this is a test',
         'object' : confmgr.Config(ttcl,
-                                  {'name' : 'ttcl',
-                                   'first': 1
-                                  }),
+                                  name  = 'ttcl',
+                                  first = 1
+                                  ),
         'int'    : 1,
         'float'  : 0.1
         }

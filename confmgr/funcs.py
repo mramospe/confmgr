@@ -68,7 +68,7 @@ def _drop( dct, drop = None ):
         obj = drop[c]
         if obj is not None:
             # It is assumed to be a dictionary
-            out[c] = _drop(dct[c], obj)
+            out[c] = _drop(dct[c].kwargs(), obj)
         else:
             out[c] = dct.pop(c)
 
