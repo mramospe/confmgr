@@ -95,8 +95,7 @@ class ConfDict(dict, ConfObj):
         '''
         This class is constructed as a dictionary.
 
-        .. seealso:: :meth:`dict.__init__`
-        .. seealso:: :meth:`ConfObj.__init__`
+        .. seealso:: :meth:`dict.__init__`, :meth:`ConfObj.__init__`
         '''
         dict.__init__(self, *args, **kwargs)
         ConfObj.__init__(self)
