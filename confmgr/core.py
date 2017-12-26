@@ -336,8 +336,9 @@ class Config(ConfObj):
     >>> c1 == c2
     False
 
-    .. note:: It is highly recommended to work with keyword arguments, since \
-    it is the only way to quarantee a good behaviour of the equivalence \
+    .. note::
+    It is highly recommended to work with keyword arguments, since
+    it is the only way to quarantee a good behaviour of the equivalence
     operators.
     '''
     def __init__( self, const, *args, **kwargs ):
