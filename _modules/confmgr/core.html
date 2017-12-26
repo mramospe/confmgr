@@ -137,8 +137,8 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This class is constructed as a dictionary.</span>
 
-<span class="sd">        .. seealso: :meth:`dict.__init__`</span>
-<span class="sd">        .. seealso: :meth:`ConfObj.__init__`</span>
+<span class="sd">        .. seealso:: :meth:`dict.__init__`</span>
+<span class="sd">        .. seealso:: :meth:`ConfObj.__init__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="nb">dict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">ConfObj</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -177,7 +177,7 @@
 <span class="sd">        :returns: comparison decision.</span>
 <span class="sd">        :rtype: bool</span>
 
-<span class="sd">        .. seealso: :meth:`ConfDict.__eq__`</span>
+<span class="sd">        .. seealso:: :meth:`ConfDict.__eq__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -243,7 +243,7 @@
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This class is constructed as a configuration dictionary.</span>
 
-<span class="sd">        .. seealso: :meth:`ConfDict.__init__`</span>
+<span class="sd">        .. seealso:: :meth:`ConfDict.__init__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ConfDict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
@@ -258,7 +258,7 @@
 <span class="sd">        :param name: name of the new element.</span>
 <span class="sd">        :type name: str or None</span>
 
-<span class="sd">        .. seealso: :meth:`ConfMgr._from_xml_node`</span>
+<span class="sd">        .. seealso:: :meth:`ConfMgr._from_xml_node`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
 
@@ -370,13 +370,17 @@
 
 <span class="sd">    &gt;&gt;&gt; from confmgr import Config</span>
 <span class="sd">    &gt;&gt;&gt; class dummy:</span>
-<span class="sd">    ...       def __init__( self, a, b ):</span>
-<span class="sd">    ...           pass</span>
+<span class="sd">    ...     def __init__( self, a, b ):</span>
+<span class="sd">    ...         pass</span>
 <span class="sd">    ...</span>
 <span class="sd">    &gt;&gt;&gt; c1 = Config(dummy, 1, 0)</span>
 <span class="sd">    &gt;&gt;&gt; c2 = Config(dummy, 1, b = 0)</span>
 <span class="sd">    &gt;&gt;&gt; c1 == c2</span>
 <span class="sd">    False</span>
+
+<span class="sd">    .. note:: It is highly recommended to work with keyword arguments, since \</span>
+<span class="sd">    it is the only way to quarantee a good behaviour of the equivalence \</span>
+<span class="sd">    operators.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="Config.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -391,7 +395,7 @@
 <span class="sd">        :param kwargs: keyword arguments to :meth:`ConfDict.__init__`.</span>
 <span class="sd">        :type kwargs: dict</span>
 
-<span class="sd">        .. seealso: :meth:`Config.build`</span>
+<span class="sd">        .. seealso:: :meth:`Config.build`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_const</span>  <span class="o">=</span> <span class="n">const</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_args</span>   <span class="o">=</span> <span class="n">args</span>

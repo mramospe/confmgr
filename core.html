@@ -141,6 +141,10 @@ information stored is the same.</p>
 <dt id="confmgr.core.ConfMgr.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfMgr.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfMgr.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class is constructed as a configuration dictionary.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -185,6 +189,10 @@ information stored is the same.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__eq__()</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -431,14 +439,18 @@ keyword arguments are identical. Defaults are thus omitted, leading to
 the following behaviour:</p>
 <div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">Config</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">dummy</span><span class="p">:</span>
-<span class="gp">... </span>      <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">):</span>
-<span class="gp">... </span>          <span class="k">pass</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">):</span>
+<span class="gp">... </span>        <span class="k">pass</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span>
 <span class="go">False</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is highly recommended to work with keyword arguments, since     it is the only way to quarantee a good behaviour of the equivalence     operators.</p>
 </div>
 <dl class="method">
 <dt id="confmgr.core.Config.__eq__">
@@ -476,6 +488,10 @@ This does not make any copy of the internal classes in “conf”.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#confmgr.core.Config.build" title="confmgr.core.Config.build"><code class="xref py py-meth docutils literal"><span class="pre">Config.build()</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="attribute">
