@@ -25,13 +25,14 @@ setup(
 
     version = version,
 
-    description = 'Package to track MVA configurations using scikit-learn',
+    description = 'Package to manage configurations and read/save them '\
+    'from/to XML files',
 
     # Read the long description from the README
     long_description = open('README.rst').readlines(),
 
     # Keywords to search for the package
-    keywords = 'mva bdt hep',
+    keywords = 'configuration hep xml',
 
     # Find all the packages in this directory
     packages = find_packages(),
@@ -40,7 +41,7 @@ setup(
     scripts = ['scripts/{}'.format(f) for f in os.listdir('scripts')],
 
     # Requisites
-    install_requires = ['matplotlib', 'numpy', 'pytest', 'scikit-learn'],
+    install_requires = ['pytest'],
 
     # Test requirements
     setup_requires = ['pytest-runner'],
