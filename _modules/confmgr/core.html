@@ -53,7 +53,7 @@
 <span class="kn">import</span> <span class="nn">xml.etree.cElementTree</span> <span class="k">as</span> <span class="nn">et</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">,</span> <span class="s1">&#39;config_builder&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfDict&#39;</span><span class="p">,</span> <span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;ConfObj&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">,</span> <span class="s1">&#39;config_builder&#39;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="config_builder"><a class="viewcode-back" href="../../core.html#confmgr.core.config_builder">[docs]</a><span class="k">class</span> <span class="nc">config_builder</span><span class="p">:</span>
@@ -107,43 +107,42 @@
     <span class="k">return</span> <span class="s1">&#39;{}.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">const</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">ConfObj</span><span class="p">:</span>
+<div class="viewcode-block" id="ConfObj"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfObj">[docs]</a><span class="k">class</span> <span class="nc">ConfObj</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Base class for the configuration objects.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfObj.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfObj.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Empty constructor.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">pass</span>
+        <span class="k">pass</span></div>
 
-    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfObj.kwargs"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfObj.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This is an abstract method</span>
 
 <span class="sd">        :returns: stored configuration.</span>
 <span class="sd">        :rtype: ConfDict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Attempt to call abstract class method&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Attempt to call abstract class method&#39;</span><span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">ConfDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">ConfObj</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfDict"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict">[docs]</a><span class="k">class</span> <span class="nc">ConfDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">ConfObj</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Represent a dictionary to store configurations. Some methods of the</span>
 <span class="sd">    dict class are overriden. The classes must be stored using the Config</span>
 <span class="sd">    class, unless they can be built using their string representation.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This class is constructed as a dictionary.</span>
 
-<span class="sd">        .. seealso:: :meth:`dict.__init__`</span>
-<span class="sd">        .. seealso:: :meth:`ConfObj.__init__`</span>
+<span class="sd">        .. seealso:: :meth:`dict.__init__`, :meth:`ConfObj.__init__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="nb">dict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">ConfObj</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ConfObj</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.__eq__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        The dictionaries are considered to be equivalent if the</span>
 <span class="sd">        information stored is the same.</span>
@@ -168,9 +167,9 @@
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># Everything went fine</span>
-        <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
 
-    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.__ne__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__ne__">[docs]</a>    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param other: another configuration to compare.</span>
 <span class="sd">        :type other: ConfMgr</span>
@@ -179,9 +178,9 @@
 
 <span class="sd">        .. seealso:: :meth:`ConfDict.__eq__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.__str__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Represent this class as a string, using the given</span>
 <span class="sd">        indentation level. The latter is meant for internal</span>
@@ -209,16 +208,16 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.kwargs"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: stored configuration.</span>
 <span class="sd">        :rtype: ConfDict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="k">def</span> <span class="nf">proc_conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.proc_conf"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.proc_conf">[docs]</a>    <span class="k">def</span> <span class="nf">proc_conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: processed configuration dictionary, where \</span>
 <span class="sd">        all the built classes are saved.</span>
@@ -231,7 +230,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">cfg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
-        <span class="k">return</span> <span class="n">cfg</span>
+        <span class="k">return</span> <span class="n">cfg</span></div></div>
 
 
 <div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfDict</span><span class="p">):</span>
