@@ -95,8 +95,8 @@ class ConfDict(dict, ConfObj):
         '''
         This class is constructed as a dictionary.
 
-        .. seealso: :meth:`dict.__init__`
-        .. seealso: :meth:`ConfObj.__init__`
+        .. seealso:: :meth:`dict.__init__`
+        .. seealso:: :meth:`ConfObj.__init__`
         '''
         dict.__init__(self, *args, **kwargs)
         ConfObj.__init__(self)
@@ -135,7 +135,7 @@ class ConfDict(dict, ConfObj):
         :returns: comparison decision.
         :rtype: bool
 
-        .. seealso: :meth:`ConfDict.__eq__`
+        .. seealso:: :meth:`ConfDict.__eq__`
         '''
         return not self.__eq__(other)
 
@@ -201,7 +201,7 @@ class ConfMgr(ConfDict):
         '''
         This class is constructed as a configuration dictionary.
 
-        .. seealso: :meth:`ConfDict.__init__`
+        .. seealso:: :meth:`ConfDict.__init__`
         '''
         ConfDict.__init__(self, *args, **kwargs)
 
@@ -216,7 +216,7 @@ class ConfMgr(ConfDict):
         :param name: name of the new element.
         :type name: str or None
 
-        .. seealso: :meth:`ConfMgr._from_xml_node`
+        .. seealso:: :meth:`ConfMgr._from_xml_node`
         '''
         if isinstance(value, Config):
 
@@ -335,6 +335,10 @@ class Config(ConfObj):
     >>> c2 = Config(dummy, 1, b = 0)
     >>> c1 == c2
     False
+
+    .. note:: It is highly recommended to work with keyword arguments, since \
+    it is the only way to quarantee a good behaviour of the equivalence \
+    operators.
     '''
     def __init__( self, const, *args, **kwargs ):
         '''
@@ -349,7 +353,7 @@ class Config(ConfObj):
         :param kwargs: keyword arguments to :meth:`ConfDict.__init__`.
         :type kwargs: dict
 
-        .. seealso: :meth:`Config.build`
+        .. seealso:: :meth:`Config.build`
         '''
         self._const  = const
         self._args   = args
