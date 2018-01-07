@@ -71,6 +71,19 @@ def test_basic_config():
         }
 
 
+@_generate_and_check
+def test_no_str_to_obj_builtins():
+    '''
+    Test a configuration with a dict, list, set and tuple objects.
+    '''
+    return {
+        'dict'  : {'first': 1, 'second': 2},
+        'list'  : ['A', 'B', 'C'],
+        'set'   : {'A', 'B', 'C'},
+        'tuple' : ('A', 'B', 'C')
+        }
+
+
 class ttcl:
     '''
     Small class to test the configuration module.
