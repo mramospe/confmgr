@@ -204,6 +204,26 @@ class ConfMgr(ConfDict):
         '''
         ConfDict.__init__(self, *args, **kwargs)
 
+    @staticmethod
+    def _const_from_tag( tag ):
+        '''
+        Get the class constructor from a given XML tag.
+
+        :param tag: XML tag.
+        :type tag: str
+        :returns: constructor related to the input tag.
+        :rtype: class constructor
+        '''
+        p = tag.rfind('.')
+
+        if p > 0:
+            modname = tag[:p]
+            clsname = tag[p + 1:]
+
+            return getattr(importlib.import_module(modname), clsname)
+        else:
+            return globals()[tag]
+
     def _create_xml_node( self, root, value, name = None ):
         '''
         Create an XML element in the given root.
@@ -264,27 +284,12 @@ class ConfMgr(ConfDict):
             d = cls((c.get('name'), cls._from_xml_node(c))
                     for c in kwels.getchildren())
 
-            path = node.tag
-
-            p = path.rfind('.')
-            if p > 0:
-                modname = path[:p]
-                clsname = path[p + 1:]
-
-                const = getattr(importlib.import_module(modname), clsname)
-            else:
-                const = globals()[path]
+            const = cls._const_from_tag(node.tag)
 
             return Config(const, *a, **d)
 
         else:
-
-            txt = node.text
-
-            try:
-                return eval(txt)
-            except:
-                return txt
+            return cls._const_from_tag(node.tag)(node.text)
 
     @classmethod
     def from_file( cls, path ):
