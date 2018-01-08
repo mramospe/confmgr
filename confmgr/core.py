@@ -282,6 +282,8 @@ class ConfMgr(ConfDict):
             txt = node.text
 
             try:
+                # The eval call is needed to parse, for example, some builtin
+                # classes like dictionaries, lists, sets and tuples.
                 return eval(txt)
             except:
                 return txt
