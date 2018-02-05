@@ -12,10 +12,9 @@ import os
 
 # confmgr
 import confmgr
-from confmgr.core import main_section_name
 
 
-__fname__ = 'test_config.ini'
+__fname__ = 'test_config.xml'
 
 
 def _generate_and_check( func ):
@@ -32,18 +31,32 @@ def _generate_and_check( func ):
         Create the configuration file and read it, checking
         that the two versions match.
         '''
-        cfg = confmgr.ConfMgr.from_dict(func())
+        cfg = confmgr.ConfMgr(func())
         cfg.save(__fname__)
 
         read = confmgr.ConfMgr.from_file(__fname__)
 
-        matches = confmgr.check_configurations(cfg, [read], skip = {main_section_name(): ['int']})
+        matches = confmgr.check_configurations(cfg, [read])
 
         os.remove(__fname__)
 
         assert len(matches) == 1
 
     return wrapper
+
+
+def test_config_equivalence():
+    '''
+    Check the equivalence behaviour of the Config class.
+    '''
+    class dummy:
+        def __init__( self, a, b ):
+            pass
+
+    c1 = confmgr.Config(dummy, 1, 0)
+    c2 = confmgr.Config(dummy, 1, b = 0)
+
+    assert c1 != c2
 
 
 @_generate_and_check
@@ -55,6 +68,19 @@ def test_basic_config():
         'string' : 'this is a test',
         'int'    : 1,
         'float'  : 0.1,
+        }
+
+
+@_generate_and_check
+def test_no_str_to_obj_builtins():
+    '''
+    Test a configuration with a dict, list, set and tuple objects.
+    '''
+    return {
+        'dict'  : {'first': 1, 'second': 2},
+        'list'  : ['A', 'B', 'C'],
+        'set'   : {'A', 'B', 'C'},
+        'tuple' : ('A', 'B', 'C')
         }
 
 
@@ -79,9 +105,23 @@ def test_class_config():
     return {
         'string' : 'this is a test',
         'object' : confmgr.Config(ttcl,
-                                  {'name' : 'ttcl',
-                                   'first': 1
-                                  }),
+                                  name  = 'ttcl',
+                                  first = 1
+                                  ),
+        'int'    : 1,
+        'float'  : 0.1
+        }
+
+
+@_generate_and_check
+def test_empty_class():
+    '''
+    Test a configuration with a class constructor
+    being called with no arguments.
+    '''
+    return {
+        'string' : 'this is a test',
+        'object' : confmgr.Config(ttcl),
         'int'    : 1,
         'float'  : 0.1
         }

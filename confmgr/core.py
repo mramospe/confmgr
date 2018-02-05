@@ -8,101 +8,285 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 
 # Python
 import importlib, inspect
-from configparser import ConfigParser
-from collections import OrderedDict as odict
+import xml.etree.cElementTree as et
 
 
-__all__ = ['ConfMgr', 'Config', 'main_section_name']
+__all__ = ['ConfDict', 'ConfMgr', 'ConfObj', 'Config', 'config_builder']
 
 
-# Name of the section holding the general configuration variables
-__main_section_name__ = 'GENERAL'
-
-
-def main_section_name():
+class config_builder:
     '''
-    Return the name of the main configuration section
-    for any file.
+    Decorator to wrap a class, creating a Config object when called.
+    For example:
 
-    :returns: main configuration name ("GENERAL" by default).
+    >>> from confmgr import config_builder
+    >>> @config_builder
+    ... def func( a, b ):
+    ...     return a, b
+    ...
+    >>> print func
+    <confmgr.core.config_builder instance at 0x7f9895318680>
+    >>> c = func(a = 0, b = 2)
+    >>> c
+    <confmgr.core.Config instance at 0x7f98950cb050>
+    >>> print c
+    func(
+         a = 0
+         b = 2
+         )
+    '''
+    def __init__( self, obj ):
+        '''
+        :param obj: object to build.
+        :type obj: any class
+        '''
+        self._obj = obj
+
+    def __call__( self, *args, **kwargs ):
+        '''
+        :param args: parameters for the class constructor.
+        :type args: tuple
+        :param kwargs: keyword parameters for the class constructor.
+        :type kwargs: dict
+        :returns: configurable built from the stored object and the arguments.
+        :rtype: Config
+        '''
+        return Config(self._obj, *args, **kwargs)
+
+
+def _class_path( const ):
+    '''
+    Return the python path to the given class constructor,
+    which consists on <module>.<class>.
+
+    :returns: whole python path to the given class constructor.
     :rtype: str
     '''
-    return __main_section_name__
+    return '{}.{}'.format(const.__module__, const.__name__)
 
 
-class ConfMgr(ConfigParser):
+class ConfObj:
     '''
-    Class to manage configurations built using the
-    :class:`Config` class.
+    Base class for the configuration objects.
+    '''
+    def __init__( self ):
+        '''
+        Empty constructor.
+        '''
+        pass
+
+    def kwargs( self ):
+        '''
+        This is an abstract method
+
+        :returns: stored configuration.
+        :rtype: ConfDict
+        '''
+        raise NotImplementedError('Attempt to call abstract class method')
+
+
+class ConfDict(dict, ConfObj):
+    '''
+    Represent a dictionary to store configurations. Some methods of the
+    dict class are overriden. The classes must be stored using the Config
+    class, unless they can be built using their string representation.
     '''
     def __init__( self, *args, **kwargs ):
         '''
-        See :meth:`configparser.ConfigParser.__init__`.
-        '''
-        ConfigParser.__init__(self, *args, **kwargs)
-        
-        self._conf = odict()
+        This class is constructed as a dictionary.
 
-    def __str__( self ):
+        .. seealso:: :meth:`dict.__init__`, :meth:`ConfObj.__init__`
         '''
-        This class is displayed showing separately each section.
+        dict.__init__(self, *args, **kwargs)
+        ConfObj.__init__(self)
+
+    def __eq__( self, other ):
         '''
-        out = '\n'
-        
-        maxl = max(map(len, self.sections()))
-        
+        The dictionaries are considered to be equivalent if the
+        information stored is the same.
+
+        :param other: another configuration to compare.
+        :type other: ConfMgr
+        :returns: comparison decision.
+        :rtype: bool
+        '''
+        if len(self) == len(other):
+
+            for k, v in self.iteritems():
+
+                if k in other:
+                    if v == other[k]:
+                        continue
+
+                # A key or value does not match
+                return False
+        else:
+            # Lengths are different
+            return False
+
+        # Everything went fine
+        return True
+
+    def __ne__( self, other ):
+        '''
+        :param other: another configuration to compare.
+        :type other: ConfMgr
+        :returns: comparison decision.
+        :rtype: bool
+
+        .. seealso:: :meth:`ConfDict.__eq__`
+        '''
+        return not self.__eq__(other)
+
+    def __str__( self, indent = 0 ):
+        '''
+        Represent this class as a string, using the given
+        indentation level. The latter is meant for internal
+        use only.
+
+        :param indent: indentation level.
+        :type indent: int
+        :returns: this class as a string.
+        :rtype: str
+        '''
+        if len(self):
+            maxl = max(map(len, self.keys()))
+        else:
+            maxl = None
+
         lines = []
-        for s in self.sections():
-            
-            items = self.items(s)
-            
-            if len(items) > 0:
+        for k, v in self.iteritems():
 
-                frmt = '{:<{}}'.format(s, maxl)
-                
-                lines.append('{} = ('.format(frmt))
-                
-                mxi = max(map(lambda it: len(it[0]), items)) + 5
-                for n, it in items:
-                    lines.append('{:>{}} = {}'.format(n, mxi, it))
-                
-                lines.append('{:>6}'.format(')'))
-                
-        return out.join(lines)
+            frmt = k.ljust(maxl)
 
-    def _process_conf( self, name, conf ):
-        '''
-        Process the given configuration dictionary.
-        
-        :param name: name of the section.
-        :type name: str
-        :param conf: items to process.
-        :type conf: dict
-        :returns: processed dictionary.
-        :rtype: dict
-        '''
-        out = odict()
-        for k, v in sorted(conf.iteritems()):
+            ind = indent + maxl
 
             if isinstance(v, Config):
-
-                # So later it can be easily loaded
-                self.set(name, k, v.full_name())
-            
-                self.add_section(k)
-            
-                dct = self._process_conf(k, v.conf())
-
-                out[k] = v.build(dct)
+                lines.append('{:>{}} = {}'.format(frmt, ind, v.__str__(ind)))
             else:
-                self.set(name, k, str(v))
+                lines.append('{:>{}} = {}'.format(frmt, ind, v))
 
-                try:
-                    out[k] = eval(v)
-                except:
-                    out[k] = v
-        
-        return out
+        return '\n'.join(lines)
+
+    def kwargs( self ):
+        '''
+        :returns: stored configuration.
+        :rtype: ConfDict
+        '''
+        return self
+
+    def proc_conf( self ):
+        '''
+        :returns: processed configuration dictionary, where \
+        all the built classes are saved.
+        :rtype: dict
+        '''
+        cfg = {}
+        for k, v in self.iteritems():
+            if isinstance(v, Config):
+                cfg[k] = v.build()
+            else:
+                cfg[k] = v
+
+        return cfg
+
+
+class ConfMgr(ConfDict):
+    '''
+    Class to manage configurations built using the :class:`Config` class. It
+    allows to read/save the stored information from/to XML files.
+    '''
+    def __init__( self, *args, **kwargs ):
+        '''
+        This class is constructed as a configuration dictionary.
+
+        .. seealso:: :meth:`ConfDict.__init__`
+        '''
+        ConfDict.__init__(self, *args, **kwargs)
+
+    def _create_xml_node( self, root, value, name = None ):
+        '''
+        Create an XML element in the given root.
+
+        :param root: XML element to write into.
+        :type root: xml.etree.cElementTree.Element
+        :param value: object to write. It can be either a Config object \
+        or a class with a string representation.
+        :param name: name of the new element.
+        :type name: str or None
+
+        .. seealso:: :meth:`ConfMgr._from_xml_node`
+        '''
+        if isinstance(value, Config):
+
+            el = et.SubElement(root, _class_path(value._const), name = name)
+
+            arels = et.SubElement(el, 'args')
+            for v in value.args():
+                self._create_xml_node(arels, v)
+
+            kwels = et.SubElement(el, 'kwargs')
+            for k, v in value.kwargs().iteritems():
+                self._create_xml_node(kwels, v, k)
+        else:
+            if name is None:
+                el = et.SubElement(root, _class_path(value.__class__))
+            else:
+                el = et.SubElement(root, _class_path(value.__class__),
+                                   name = name)
+            el.text = str(value)
+
+        return el
+
+    @classmethod
+    def _from_xml_node( cls, node ):
+        '''
+        Extract the information from a XML node. If the node represents
+        an object, then a Config object is built with its constructor
+        and configuration. Otherwise an "eval" call is done. If it fails,
+        the raw string is saved.
+
+        :param cls: object constructor.
+        :type cls: this class constructor.
+        :param node: XML node to process.
+        :type node: xml.etree.cElementTree.Element
+        :returns: saved class as a python object.
+        '''
+        children = node.getchildren()
+
+        if children:
+
+            # The only children must be args and kwargs
+            arels, kwels = children
+
+            a = [cls._from_xml_node(c) for c in arels.getchildren()]
+
+            d = cls((c.get('name'), cls._from_xml_node(c))
+                    for c in kwels.getchildren())
+
+            path = node.tag
+
+            p = path.rfind('.')
+            if p > 0:
+                modname = path[:p]
+                clsname = path[p + 1:]
+
+                const = getattr(importlib.import_module(modname), clsname)
+            else:
+                const = globals()[path]
+
+            return Config(const, *a, **d)
+
+        else:
+
+            txt = node.text
+
+            try:
+                # The eval call is needed to parse, for example, some builtin
+                # classes like dictionaries, lists, sets and tuples.
+                return eval(txt)
+            except:
+                return txt
 
     @classmethod
     def from_file( cls, path ):
@@ -114,144 +298,140 @@ class ConfMgr(ConfigParser):
         :returns: configuration manager.
         :rtype: this class type
         '''
-        cfg = cls()
-        cfg.read(path)
+        tree = et.parse(path)
+        root = tree.getroot()
 
-        # Process the configuration
-        res = odict()
-        for name, section in reversed(cfg.items()):
-            
-            sub = odict()
-            
-            for k, v in section.iteritems():
-                try:
-                    sub[k] = eval(v)
-                except:
-                    sub[k] = v
-
-            res[name] = sub
-
-        # Build all the classes
-        its = res.items()
-        for i, (name, dct) in enumerate(its):
-            for n, d in its[:i]:
-                if n in dct:
-
-                    # Access the class constructor
-                    path = dct[n]
-                    
-                    modname = path[:path.rfind('.')]
-                    clsname = path[path.rfind('.') + 1:]
-                    
-                    const  = getattr(importlib.import_module(modname), clsname)
-                    
-                    # Remove the attributes not present in the constructor
-                    args = inspect.getargspec(const.__init__).args
-                    args.remove('self')
-
-                    inputs = {k: v for k, v in d.iteritems() if k in args}
-
-                    # Call the constructor
-                    dct[n] = const(**inputs)
-
-        cfg._conf = res
-
-        return cfg
-
-    @classmethod
-    def from_config( cls, name, cfg ):
-        '''
-        Build the class from a :class:`Config` object.
-
-        :param cfg: input configurable.
-        :type cfg: Config
-        :returns: configuration manager.
-        :rtype: this class type
-        '''
-        return cls.from_dict({name: cfg})
-        
-    @classmethod
-    def from_dict( cls, dct ):
-        '''
-        Build the class from a dictionary.
-
-        :param dct: input dictionary.
-        :type dct: dict
-        :returns: configuration manager.
-        :rtype: this class type
-        '''
-        cfg = cls()
-        
-        cfg.add_section(main_section_name())
-        
-        cfg._conf = cfg._process_conf(main_section_name(), dct)
-        
-        return cfg
-        
-    def proc_conf( self ):
-        '''
-        :returns: processed configuration dictionary, where \
-        all the built classes are saved.
-        :rtype: dict
-        '''
-        return self._conf
+        return cls((c.get('name'), cls._from_xml_node(c))
+                   for c in root.getchildren())
 
     def save( self, path ):
         '''
-        :param cfg: configuration.
-        :type cfg: ConfigParser
-        :param path: path to save the output file.
+        :param path: path to the output file (adding the '.xml' \
+        extension is recomended).
         :type path: str
         '''
-        print 'INFO: Generate new configuration file "{}"'\
-            ''.format(path)
+        root = et.Element(_class_path(self.__class__))
 
-        with open(path, 'wb') as f:
-            self.write(f)
+        for k, v in self.iteritems():
+            self._create_xml_node(root, v, k)
+
+        tree = et.ElementTree(root)
+
+        tree.write(path)
 
 
-class Config:
+class Config(ConfObj):
     '''
-    Class to store any class constructor plus its
-    configuration.
+    Class to store any class constructor plus its configuration. Note that two
+    Config objects are considered equivalent only if the provided arguments and
+    keyword arguments are identical. Defaults are thus omitted, leading to
+    the following behaviour:
+
+    >>> from confmgr import Config
+    >>> class dummy:
+    ...     def __init__( self, a, b ):
+    ...         pass
+    ...
+    >>> c1 = Config(dummy, 1, 0)
+    >>> c2 = Config(dummy, 1, b = 0)
+    >>> c1 == c2
+    False
+
+    .. note::
+       It is highly recommended to work with keyword arguments, since \
+       it is the only way to quarantee a good behaviour of the equivalence \
+       operators.
     '''
-    def __init__( self, const, dct = None ):
+    def __init__( self, const, *args, **kwargs ):
         '''
+        The input configuration in "conf" is saved as a ConfMgr object,
+        to ensure that the :meth:`Config.build` method works properly.
+        This does not make any copy of the internal classes in "conf".
+
         :param const: constructor of the configurable class.
         :type const: any class constructor
-        :param dct: configuration of the class.
-        :type dct: dict or None
-        '''
-        self._conf  = dct or {}
-        self._const = const
+        :param args: arguments to :meth:`ConfDict.__init__`.
+        :type args: tuple
+        :param kwargs: keyword arguments to :meth:`ConfDict.__init__`.
+        :type kwargs: dict
 
-    def build( self, dct = None ):
+        .. seealso:: :meth:`Config.build`
         '''
-        :param dct: configuration to build the class. If None \
-        is provided, it is assumed that the stored configuration \
-        has the correct format i.e there are no other Config \
-        classes within it, or the constructor expects them.
-        :type dct: dict or None
+        self._const  = const
+        self._args   = args
+        self._kwargs = ConfDict(kwargs)
+
+    def __eq__( self, other ):
+        '''
+        :param other: another configurable to compare.
+        :type other: Config
+        :returns: comparison decision.
+        :rtype: bool
+        '''
+        # Check the constructor
+        m_c = (self._const == other._const)
+        if not m_c:
+            return False
+
+        # Check the arguments
+        m_s = (set(self._args) == set(other._args))
+        if not m_s:
+            return False
+
+        # Check the keyword arguments
+        return self._kwargs == other._kwargs
+
+    def __str__( self, indent = 0 ):
+        '''
+        Override the default :meth:`ConfDict.__str__` method,
+        displaying as well the information of the class.
+
+        :returns: this class as a string.
+        :rtype: str
+        '''
+        if not (self._args or self._kwargs):
+            return '{}()'.format(self._const.__name__)
+
+        lines = ['{}('.format(self._const.__name__)]
+
+        args = ['{:>{}}'.format(a, indent + 6) for a in self._args]
+        if args:
+            lines.append('{},\n'.join(args))
+
+        if self._kwargs:
+            lines.append(self._kwargs.__str__(indent + 5))
+
+        lines.append(')'.rjust(indent + 1))
+
+        return '\n'.join(lines)
+
+    def args( self ):
+        '''
+        :returns: standard arguments.
+        :rtype: tuple
+        '''
+        return self._args
+
+    def build( self ):
+        '''
+        Return a class using the stored constructor and
+        configuration.
+
         :returns: built class.
         :rtype: built class type
         '''
-        if dct is None:
-            return self._const(**self._conf)
-        else:
-            return self._const(**dct)
+        return self._const(*self._args, **self._kwargs.proc_conf())
 
-    def conf( self ):
+    def const( self ):
         '''
-        :returns: configuration for the class in this object.
-        :rtype: dict
+        :returns: constructor for the class in this object.
+        :rtype: class constructor
         '''
-        return self._conf
+        return self._const
 
-    def full_name( self ):
+    def kwargs( self ):
         '''
-        :returns: full name of the class attached to \
-        this configurable.
-        :rtype: str
+        :returns: stored configuration.
+        :rtype: ConfDict
         '''
-        cl = self._const
-        return '{}.{}'.format(cl.__module__, cl.__name__)
+        return self._kwargs
