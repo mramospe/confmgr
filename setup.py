@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-Setup script for the confmgr package
+Setup script for the "confmgr" package
 '''
 
 __author__ = 'Miguel Ramos Pernas'
@@ -46,7 +46,7 @@ setup(
     'from/to XML files',
 
     # Read the long description from the README
-    long_description = open('README.rst').readlines(),
+    long_description = open('README.rst').read(),
 
     # Keywords to search for the package
     keywords = 'configuration hep xml',
