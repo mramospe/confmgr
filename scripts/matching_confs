@@ -55,9 +55,9 @@ while ic < len(confs):
         for i in reversed(remove):
             del confs[i]
 
-        print '-- Found {} files with the same '\
-            'configuration: {}'.format(len(ms) + 1, matches)
+        print('-- Found {} files with the same '\
+            'configuration: {}'.format(len(ms) + 1, matches))
 
-        print '--- Configuration:\n{}'.format(c)
+        print('--- Configuration:\n{}'.format(c))
 
     ic += 1

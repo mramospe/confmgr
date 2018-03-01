@@ -24,12 +24,12 @@ class config_builder:
     ... def func( a, b ):
     ...     return a, b
     ...
-    >>> print func
+    >>> print(func)
     <confmgr.core.config_builder instance at 0x7f9895318680>
     >>> c = func(a = 0, b = 2)
     >>> c
     <confmgr.core.Config instance at 0x7f98950cb050>
-    >>> print c
+    >>> print(c)
     func(
          a = 0
          b = 2

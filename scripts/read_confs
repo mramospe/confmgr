@@ -30,6 +30,6 @@ for f in args.files:
     out = '* Configuration in file "{}" *'.format(f)
     lo  = len(out)
 
-    print '*'*lo + '\n{}\n'.format(out) + '*'*lo
+    print('*'*lo + '\n{}\n'.format(out) + '*'*lo)
 
-    print confmgr.ConfMgr.from_file(f)
+    print(confmgr.ConfMgr.from_file(f))
