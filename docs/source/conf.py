@@ -12,10 +12,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-# Fix odd behaviour of functools.wraps when documenting code. Even when calling
-# hep_spt.core.decorate (which calls functools.wrap), only "*args, **kwargs"
-# appears in the documentation, while in the explanation the correct arguments
-# are shown.
+# Fix odd behaviour of functools.wraps when documenting code
 #
 # See: https://github.com/sphinx-doc/sphinx/issues/1711
 #
@@ -24,7 +21,7 @@ import functools
 def no_op_wraps( func ):
     '''
     Replaces functools.wraps in order to undo wrapping when generating
-    Sphinx documentation. This must be done before "hep_spt" is imported.
+    Sphinx documentation. This must be done before "confmgr" is imported.
     '''
     if func.__module__ is None or 'confmgr' not in func.__module__:
         return functools.orig_wraps(func)
