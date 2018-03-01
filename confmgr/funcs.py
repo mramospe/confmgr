@@ -63,7 +63,7 @@ def _drop( dct, drop = None ):
     drop = drop or {}
 
     out = ConfMgr()
-    for c in dct.viewkeys() & drop.viewkeys():
+    for c in set(dct.keys()) & set(drop.keys()):
 
         obj = drop[c]
         if obj is not None:

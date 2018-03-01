@@ -112,7 +112,7 @@ class ConfDict(dict, ConfObj):
         '''
         if len(self) == len(other):
 
-            for k, v in self.iteritems():
+            for k, v in self.items():
 
                 if k in other:
                     if v == other[k]:
@@ -155,7 +155,7 @@ class ConfDict(dict, ConfObj):
             maxl = None
 
         lines = []
-        for k, v in self.iteritems():
+        for k, v in self.items():
 
             frmt = k.ljust(maxl)
 
@@ -182,7 +182,7 @@ class ConfDict(dict, ConfObj):
         :rtype: dict
         '''
         cfg = {}
-        for k, v in self.iteritems():
+        for k, v in self.items():
             if isinstance(v, Config):
                 cfg[k] = v.build()
             else:
@@ -226,7 +226,7 @@ class ConfMgr(ConfDict):
                 self._create_xml_node(arels, v)
 
             kwels = et.SubElement(el, 'kwargs')
-            for k, v in value.kwargs().iteritems():
+            for k, v in value.kwargs().items():
                 self._create_xml_node(kwels, v, k)
         else:
             if name is None:
@@ -312,7 +312,7 @@ class ConfMgr(ConfDict):
         '''
         root = et.Element(_class_path(self.__class__))
 
-        for k, v in self.iteritems():
+        for k, v in self.items():
             self._create_xml_node(root, v, k)
 
         tree = et.ElementTree(root)
