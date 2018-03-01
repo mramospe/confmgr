@@ -9,10 +9,6 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 # Python
 import os
 
-# Scikit-learn
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-
 # confmgr
 from confmgr import ConfMgr, Config, check_configurations
 
