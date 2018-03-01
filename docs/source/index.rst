@@ -3,19 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+Introduction
+============
+
 .. include:: ../../README.rst
+   :start-after: inclusion-marker-do-not-remove
 
-Modules
-=======
+Functions and classes
+=====================
 
-Here you can find the documentation on the internal
-modules of the confmgr package.
+Here you can find the documentation on the functions and classes
+of the confmgr package. The class inheritance diagram is also shown.
 
-.. toctree::
-   :maxdepth: 2
-
-   core
-   funcs
+.. automodapi:: confmgr
+   :no-heading:
 
 Indices and tables
 ==================

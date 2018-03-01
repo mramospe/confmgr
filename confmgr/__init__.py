@@ -1,12 +1,3 @@
-'''
-confmgr
-=======
-
-Add extra functionality to the scikit-learn package,
-allowing to keep track of the configurations used
-to train MVA methods.
-'''
-
 __author__  = ['Miguel Ramos Pernas']
 __email__   = ['miguel.ramos.pernas@cern.ch']
 
