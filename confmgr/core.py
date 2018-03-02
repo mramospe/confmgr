@@ -191,7 +191,7 @@ class ConfDict(dict, ConfObj):
         cfg = {}
         for k, v in self.items():
             if isinstance(v, Config):
-                cfg[k] = v.build()
+                cfg[k] = v()
             else:
                 cfg[k] = v
 
@@ -370,6 +370,16 @@ class Config(ConfObj):
         self._args   = args
         self._kwargs = ConfDict(kwargs)
 
+    def __call__( self ):
+        '''
+        Return a class using the stored constructor and
+        configuration.
+
+        :returns: built class.
+        :rtype: built class type
+        '''
+        return self._const(*self._args, **self._kwargs.proc_conf())
+
     def __eq__( self, other ):
         '''
         Compare two Config objects.
@@ -424,16 +434,6 @@ class Config(ConfObj):
         :rtype: tuple
         '''
         return self._args
-
-    def build( self ):
-        '''
-        Return a class using the stored constructor and
-        configuration.
-
-        :returns: built class.
-        :rtype: built class type
-        '''
-        return self._const(*self._args, **self._kwargs.proc_conf())
 
     def const( self ):
         '''
