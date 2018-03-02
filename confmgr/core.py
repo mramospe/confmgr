@@ -7,7 +7,7 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 
 
 # Python
-import importlib, inspect
+import importlib
 import xml.etree.cElementTree as et
 
 
@@ -102,8 +102,8 @@ class ConfDict(dict, ConfObj):
 
     def __eq__( self, other ):
         '''
-        The dictionaries are considered to be equivalent if the
-        information stored is the same.
+        Compare two ConfDict objects. The dictionaries are considered to
+        be equivalent if the information stored is the same.
 
         :param other: another configuration to compare.
         :type other: ConfMgr
@@ -129,6 +129,9 @@ class ConfDict(dict, ConfObj):
 
     def __ne__( self, other ):
         '''
+        Compare two ConfDict objects. The dictionaries are considered to
+        be different if the information stored is different.
+
         :param other: another configuration to compare.
         :type other: ConfMgr
         :returns: comparison decision.
@@ -170,6 +173,8 @@ class ConfDict(dict, ConfObj):
 
     def kwargs( self ):
         '''
+        Return the stored configuration.
+
         :returns: stored configuration.
         :rtype: ConfDict
         '''
@@ -177,6 +182,8 @@ class ConfDict(dict, ConfObj):
 
     def proc_conf( self ):
         '''
+        Process the configuration dictionary with all the class being built.
+
         :returns: processed configuration dictionary, where \
         all the built classes are saved.
         :rtype: dict
@@ -306,6 +313,8 @@ class ConfMgr(ConfDict):
 
     def save( self, path ):
         '''
+        Save this class on a XML file.
+
         :param path: path to the output file (adding the '.xml' \
         extension is recomended).
         :type path: str
@@ -363,6 +372,8 @@ class Config(ConfObj):
 
     def __eq__( self, other ):
         '''
+        Compare two Config objects.
+
         :param other: another configurable to compare.
         :type other: Config
         :returns: comparison decision.
@@ -407,7 +418,9 @@ class Config(ConfObj):
 
     def args( self ):
         '''
-        :returns: standard arguments.
+        Return the arguments to be passed to the constructor.
+
+        :returns: arguments to be passed to the constructor.
         :rtype: tuple
         '''
         return self._args
@@ -424,6 +437,8 @@ class Config(ConfObj):
 
     def const( self ):
         '''
+        Return the class constructor.
+
         :returns: constructor for the class in this object.
         :rtype: class constructor
         '''
@@ -431,6 +446,8 @@ class Config(ConfObj):
 
     def kwargs( self ):
         '''
+        Return the keyword to be passed to the constructor.
+
         :returns: stored configuration.
         :rtype: ConfDict
         '''
