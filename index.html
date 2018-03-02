@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Introduction &#8212; confmgr 0.0.0 documentation</title>
+    <title>Introduction &#8212; confmgr 0.0.0.dev1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.0.dev1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="core" href="core.html" />
+    <link rel="next" title="check_configurations" href="api/confmgr.check_configurations.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -46,21 +46,68 @@
 The classes and functions allow to:</p>
 <ul class="simple">
 <li>Read and save configurations in XML format.</li>
-<li>Save a class constructor together with the arguments used to build it through the <code class="xref py py-class docutils literal"><span class="pre">confmgr.Config</span></code> class.</li>
+<li>Save a class constructor together with the arguments used to build it through the <a class="reference internal" href="api/confmgr.Config.html#confmgr.Config" title="confmgr.Config"><code class="xref py py-class docutils literal"><span class="pre">confmgr.Config</span></code></a> class.</li>
 <li>The configuration of the saved classes is then used to rebuild the same classes from the configuration file.</li>
 <li>Some functions also allow to manage files with duplicated configuration.</li>
 </ul>
-<p>Find the full documentation for the package in the <a class="reference external" href="https://mramospe.github.io/confmgr/">GitHub Pages</a>.</p>
 </div>
-<div class="section" id="modules">
-<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
-<p>Here you can find the documentation on the internal
-modules of the confmgr package.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="core.html">core</a></li>
-<li class="toctree-l1"><a class="reference internal" href="funcs.html">funcs</a></li>
-</ul>
+<div class="section" id="functions-and-classes">
+<h1>Functions and classes<a class="headerlink" href="#functions-and-classes" title="Permalink to this headline">¶</a></h1>
+<p>Here you can find the documentation on the functions and classes
+of the confmgr package. The class inheritance diagram is also shown.</p>
+<span class="target" id="module-confmgr"></span><div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/confmgr.check_configurations.html#confmgr.check_configurations" title="confmgr.check_configurations"><code class="xref py py-obj docutils literal"><span class="pre">check_configurations</span></code></a>(config,&nbsp;cfglst[,&nbsp;skip])</td>
+<td>Check in the given set of configuration manager if any other file exists with the same configuration.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/confmgr.get_configurations.html#confmgr.get_configurations" title="confmgr.get_configurations"><code class="xref py py-obj docutils literal"><span class="pre">get_configurations</span></code></a>(path,&nbsp;pattern)</td>
+<td>Get the list of current configurations in “path” following the given pattern.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/confmgr.ConfDict.html#confmgr.ConfDict" title="confmgr.ConfDict"><code class="xref py py-obj docutils literal"><span class="pre">ConfDict</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Represent a dictionary to store configurations.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/confmgr.ConfMgr.html#confmgr.ConfMgr" title="confmgr.ConfMgr"><code class="xref py py-obj docutils literal"><span class="pre">ConfMgr</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Class to manage configurations built using the <a class="reference internal" href="api/confmgr.Config.html#confmgr.Config" title="confmgr.Config"><code class="xref py py-class docutils literal"><span class="pre">Config</span></code></a> class.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/confmgr.ConfObj.html#confmgr.ConfObj" title="confmgr.ConfObj"><code class="xref py py-obj docutils literal"><span class="pre">ConfObj</span></code></a>()</td>
+<td>Base class for the configuration objects.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/confmgr.Config.html#confmgr.Config" title="confmgr.Config"><code class="xref py py-obj docutils literal"><span class="pre">Config</span></code></a>(const,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Class to store any class constructor plus its configuration.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/confmgr.config_builder.html#confmgr.config_builder" title="confmgr.config_builder"><code class="xref py py-obj docutils literal"><span class="pre">config_builder</span></code></a>(obj)</td>
+<td>Decorator to wrap a class, creating a Config object when called.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="class-inheritance-diagram">
+<h2>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<img src="_images/inheritance-ea84682ddc7ebf8042bda58217362f6d7e777dad.png" alt="Inheritance diagram of confmgr.core.ConfDict, confmgr.core.ConfMgr, confmgr.core.ConfObj, confmgr.core.Config, confmgr.core.config_builder" usemap="#inheritanceb8ca903885" class="inheritance"/>
+<map id="inheritanceb8ca903885" name="inheritanceb8ca903885">
+<area shape="rect" id="node1" title="Represent a dictionary to store configurations. Some methods of the" alt="" coords="164,29,240,55"/>
+<area shape="rect" id="node3" title="Class to manage configurations built using the :class:`Config` class. It" alt="" coords="288,29,363,55"/>
+<area shape="rect" id="node2" title="Base class for the configuration objects." alt="" coords="25,55,97,80"/>
+<area shape="rect" id="node4" title="Class to store any class constructor plus its configuration. Note that two" alt="" coords="166,79,238,104"/>
+<area shape="rect" id="node5" title="Decorator to wrap a class, creating a Config object when called." alt="" coords="5,5,116,31"/>
+</map>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
@@ -89,15 +136,22 @@ modules of the confmgr package.</p>
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="core.html">core</a></li>
-<li class="toctree-l1"><a class="reference internal" href="funcs.html">funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.check_configurations.html">check_configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.get_configurations.html">get_configurations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.ConfDict.html">ConfDict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.ConfMgr.html">ConfMgr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.ConfObj.html">ConfObj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.Config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/confmgr.config_builder.html">config_builder</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="core.html" title="next chapter">core</a></li>
+      <li>Next: <a href="api/confmgr.check_configurations.html" title="next chapter">check_configurations</a></li>
   </ul></li>
 </ul>
 </div>
@@ -119,7 +173,7 @@ modules of the confmgr package.</p>
       &copy;2017, Miguel Ramos Pernas.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

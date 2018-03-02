@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>core &#8212; confmgr 0.0.0 documentation</title>
+    <title>core &#8212; confmgr 0.0.0.dev1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.0.dev1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -47,14 +47,14 @@
 <dl class="class">
 <dt id="confmgr.core.ConfDict">
 <em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">ConfDict</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#ConfDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.ConfDict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a>, <a class="reference internal" href="#confmgr.core.ConfObj" title="confmgr.core.ConfObj"><code class="xref py py-class docutils literal"><span class="pre">confmgr.core.ConfObj</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a>, <a class="reference internal" href="#confmgr.core.ConfObj" title="confmgr.core.ConfObj"><code class="xref py py-class docutils literal"><span class="pre">confmgr.core.ConfObj</span></code></a></p>
 <p>Represent a dictionary to store configurations. Some methods of the
 dict class are overriden. The classes must be stored using the Config
 class, unless they can be built using their string representation.</p>
 <dl class="attribute">
 <dt id="confmgr.core.ConfDict.__class__">
 <code class="descname">__class__</code><a class="headerlink" href="#confmgr.core.ConfDict.__class__" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#type" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
@@ -97,7 +97,7 @@ information stored is the same.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">comparison decision.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></td>
 </tr>
 </tbody>
 </table>
@@ -186,7 +186,7 @@ information stored is the same.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">comparison decision.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></td>
 </tr>
 </tbody>
 </table>
@@ -245,11 +245,11 @@ use only.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – indentation level.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – indentation level.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">this class as a string.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -358,7 +358,7 @@ overrides the normal algorithm (and the outcome is cached).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary, where         all the built classes are saved.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -408,7 +408,7 @@ allows to read/save the stored information from/to XML files.</p>
 <dl class="attribute">
 <dt id="confmgr.core.ConfMgr.__class__">
 <code class="descname">__class__</code><a class="headerlink" href="#confmgr.core.ConfMgr.__class__" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/2/library/functions.html#type" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">type</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
@@ -451,7 +451,7 @@ information stored is the same.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">comparison decision.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></td>
 </tr>
 </tbody>
 </table>
@@ -540,7 +540,7 @@ information stored is the same.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">comparison decision.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></td>
 </tr>
 </tbody>
 </table>
@@ -599,11 +599,11 @@ use only.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – indentation level.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indent</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – indentation level.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">this class as a string.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -643,7 +643,7 @@ overrides the normal algorithm (and the outcome is cached).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path to the configuration file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – path to the configuration file.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">configuration manager.</td>
 </tr>
@@ -730,7 +730,7 @@ overrides the normal algorithm (and the outcome is cached).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary, where         all the built classes are saved.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -743,7 +743,7 @@ overrides the normal algorithm (and the outcome is cached).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – path to the output file (adding the ‘.xml’         extension is recomended).</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – path to the output file (adding the ‘.xml’         extension is recomended).</td>
 </tr>
 </tbody>
 </table>
@@ -825,7 +825,7 @@ In either case, this is followed by: for k in F: D[k] = F[k]</p>
 Config objects are considered equivalent only if the provided arguments and
 keyword arguments are identical. Defaults are thus omitted, leading to
 the following behaviour:</p>
-<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">Config</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">Config</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">dummy</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">):</span>
 <span class="gp">... </span>        <span class="k">pass</span>
@@ -851,7 +851,7 @@ the following behaviour:</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">comparison decision.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></td>
 </tr>
 </tbody>
 </table>
@@ -869,8 +869,8 @@ This does not make any copy of the internal classes in “conf”.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>const</strong> (<em>any class constructor</em>) – constructor of the configurable class.</li>
-<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) – arguments to <a class="reference internal" href="#confmgr.core.ConfDict.__init__" title="confmgr.core.ConfDict.__init__"><code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code></a>.</li>
-<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – keyword arguments to <a class="reference internal" href="#confmgr.core.ConfDict.__init__" title="confmgr.core.ConfDict.__init__"><code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code></a>.</li>
+<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)"><em>tuple</em></a>) – arguments to <a class="reference internal" href="#confmgr.core.ConfDict.__init__" title="confmgr.core.ConfDict.__init__"><code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code></a>.</li>
+<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – keyword arguments to <a class="reference internal" href="#confmgr.core.ConfDict.__init__" title="confmgr.core.ConfDict.__init__"><code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code></a>.</li>
 </ul>
 </td>
 </tr>
@@ -898,7 +898,7 @@ displaying as well the information of the class.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">this class as a string.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)">str</a></td>
 </tr>
 </tbody>
 </table>
@@ -913,7 +913,7 @@ displaying as well the information of the class.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">standard arguments.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)">tuple</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></td>
 </tr>
 </tbody>
 </table>
@@ -973,7 +973,7 @@ configuration.</p>
 <em class="property">class </em><code class="descclassname">confmgr.core.</code><code class="descname">config_builder</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/confmgr/core.html#config_builder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.core.config_builder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator to wrap a class, creating a Config object when called.
 For example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">config_builder</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">config_builder</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@config_builder</span>
 <span class="gp">... </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
@@ -998,8 +998,8 @@ For example:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#tuple" title="(in Python v2.7)"><em>tuple</em></a>) – parameters for the class constructor.</li>
-<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – keyword parameters for the class constructor.</li>
+<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)"><em>tuple</em></a>) – parameters for the class constructor.</li>
+<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – keyword parameters for the class constructor.</li>
 </ul>
 </td>
 </tr>
@@ -1083,7 +1083,7 @@ For example:</p>
       &copy;2017, Miguel Ramos Pernas.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

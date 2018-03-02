@@ -1,0 +1,7 @@
+<map id="inheritanceb8ca903885" name="inheritanceb8ca903885">
+<area shape="rect" id="node1" title="Represent a dictionary to store configurations. Some methods of the" alt="" coords="164,29,240,55"/>
+<area shape="rect" id="node3" title="Class to manage configurations built using the :class:`Config` class. It" alt="" coords="288,29,363,55"/>
+<area shape="rect" id="node2" title="Base class for the configuration objects." alt="" coords="25,55,97,80"/>
+<area shape="rect" id="node4" title="Class to store any class constructor plus its configuration. Note that two" alt="" coords="166,79,238,104"/>
+<area shape="rect" id="node5" title="Decorator to wrap a class, creating a Config object when called." alt="" coords="5,5,116,31"/>
+</map>

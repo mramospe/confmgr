@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>confmgr.funcs &#8212; confmgr 0.0.0 documentation</title>
+    <title>confmgr.funcs &#8212; confmgr 0.0.0.dev1 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.0.dev1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -40,7 +40,7 @@
           <div class="body" role="main">
             
   <h1>Source code for confmgr.funcs</h1><div class="highlight"><pre>
-<span class="sd">&#39;&#39;&#39;</span>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Functions to manage configurations.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
@@ -57,7 +57,7 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;check_configurations&#39;</span><span class="p">,</span> <span class="s1">&#39;get_configurations&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="check_configurations"><a class="viewcode-back" href="../../funcs.html#confmgr.funcs.check_configurations">[docs]</a><span class="k">def</span> <span class="nf">check_configurations</span><span class="p">(</span> <span class="n">config</span><span class="p">,</span> <span class="n">cfglst</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
+<div class="viewcode-block" id="check_configurations"><a class="viewcode-back" href="../../api/confmgr.check_configurations.html#confmgr.check_configurations">[docs]</a><span class="k">def</span> <span class="nf">check_configurations</span><span class="p">(</span> <span class="n">config</span><span class="p">,</span> <span class="n">cfglst</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Check in the given set of configuration manager if</span>
 <span class="sd">    any other file exists with the same configuration.</span>
@@ -105,7 +105,7 @@
     <span class="n">drop</span> <span class="o">=</span> <span class="n">drop</span> <span class="ow">or</span> <span class="p">{}</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ConfMgr</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dct</span><span class="o">.</span><span class="n">viewkeys</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">drop</span><span class="o">.</span><span class="n">viewkeys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">dct</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">drop</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
 
         <span class="n">obj</span> <span class="o">=</span> <span class="n">drop</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -117,7 +117,7 @@
     <span class="k">return</span> <span class="n">out</span>
 
 
-<div class="viewcode-block" id="get_configurations"><a class="viewcode-back" href="../../funcs.html#confmgr.funcs.get_configurations">[docs]</a><span class="k">def</span> <span class="nf">get_configurations</span><span class="p">(</span> <span class="n">path</span><span class="p">,</span> <span class="n">pattern</span> <span class="p">):</span>
+<div class="viewcode-block" id="get_configurations"><a class="viewcode-back" href="../../api/confmgr.get_configurations.html#confmgr.get_configurations">[docs]</a><span class="k">def</span> <span class="nf">get_configurations</span><span class="p">(</span> <span class="n">path</span><span class="p">,</span> <span class="n">pattern</span> <span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Get the list of current configurations in &quot;path&quot;</span>
 <span class="sd">    following the given pattern.</span>
@@ -133,7 +133,7 @@
 
     <span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)]</span>
 
-    <span class="n">full_lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConfMgr</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;{}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">string</span><span class="p">))</span>
+    <span class="n">full_lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConfMgr</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">string</span><span class="p">))</span>
                 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">matches</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">full_lst</span></div>
@@ -155,8 +155,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../core.html">core</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../funcs.html">funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.check_configurations.html">check_configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.get_configurations.html">get_configurations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.ConfDict.html">ConfDict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.ConfMgr.html">ConfMgr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.ConfObj.html">ConfObj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.Config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.config_builder.html">config_builder</a></li>
 </ul>
 
 <div class="relations">
@@ -186,7 +193,7 @@
       &copy;2017, Miguel Ramos Pernas.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
     </div>

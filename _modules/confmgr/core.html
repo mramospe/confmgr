@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>confmgr.core &#8212; confmgr 0.0.0 documentation</title>
+    <title>confmgr.core &#8212; confmgr 0.0.0.dev1 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.0.dev1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -40,7 +40,7 @@
           <div class="body" role="main">
             
   <h1>Source code for confmgr.core</h1><div class="highlight"><pre>
-<span class="sd">&#39;&#39;&#39;</span>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Classes to parse configuration files.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
@@ -49,14 +49,14 @@
 
 
 <span class="c1"># Python</span>
-<span class="kn">import</span> <span class="nn">importlib</span><span class="o">,</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">xml.etree.cElementTree</span> <span class="k">as</span> <span class="nn">et</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfDict&#39;</span><span class="p">,</span> <span class="s1">&#39;ConfMgr&#39;</span><span class="p">,</span> <span class="s1">&#39;ConfObj&#39;</span><span class="p">,</span> <span class="s1">&#39;Config&#39;</span><span class="p">,</span> <span class="s1">&#39;config_builder&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="config_builder"><a class="viewcode-back" href="../../core.html#confmgr.core.config_builder">[docs]</a><span class="k">class</span> <span class="nc">config_builder</span><span class="p">:</span>
+<div class="viewcode-block" id="config_builder"><a class="viewcode-back" href="../../api/confmgr.config_builder.html#confmgr.config_builder">[docs]</a><span class="k">class</span> <span class="nc">config_builder</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Decorator to wrap a class, creating a Config object when called.</span>
 <span class="sd">    For example:</span>
@@ -66,25 +66,25 @@
 <span class="sd">    ... def func( a, b ):</span>
 <span class="sd">    ...     return a, b</span>
 <span class="sd">    ...</span>
-<span class="sd">    &gt;&gt;&gt; print func</span>
+<span class="sd">    &gt;&gt;&gt; print(func)</span>
 <span class="sd">    &lt;confmgr.core.config_builder instance at 0x7f9895318680&gt;</span>
 <span class="sd">    &gt;&gt;&gt; c = func(a = 0, b = 2)</span>
 <span class="sd">    &gt;&gt;&gt; c</span>
 <span class="sd">    &lt;confmgr.core.Config instance at 0x7f98950cb050&gt;</span>
-<span class="sd">    &gt;&gt;&gt; print c</span>
+<span class="sd">    &gt;&gt;&gt; print(c)</span>
 <span class="sd">    func(</span>
 <span class="sd">         a = 0</span>
 <span class="sd">         b = 2</span>
 <span class="sd">         )</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="config_builder.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.config_builder.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param obj: object to build.</span>
 <span class="sd">        :type obj: any class</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span> <span class="o">=</span> <span class="n">obj</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span> <span class="o">=</span> <span class="n">obj</span>
 
-<div class="viewcode-block" id="config_builder.__call__"><a class="viewcode-back" href="../../core.html#confmgr.core.config_builder.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+<div class="viewcode-block" id="config_builder.__call__"><a class="viewcode-back" href="../../api/confmgr.config_builder.html#confmgr.config_builder.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param args: parameters for the class constructor.</span>
 <span class="sd">        :type args: tuple</span>
@@ -104,20 +104,20 @@
 <span class="sd">    :returns: whole python path to the given class constructor.</span>
 <span class="sd">    :rtype: str</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="s1">&#39;{}.{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">const</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span> <span class="n">const</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ConfObj"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfObj">[docs]</a><span class="k">class</span> <span class="nc">ConfObj</span><span class="p">:</span>
+<div class="viewcode-block" id="ConfObj"><a class="viewcode-back" href="../../api/confmgr.ConfObj.html#confmgr.ConfObj">[docs]</a><span class="k">class</span> <span class="nc">ConfObj</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Base class for the configuration objects.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="ConfObj.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfObj.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Empty constructor.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">pass</span></div>
+        <span class="k">pass</span>
 
-<div class="viewcode-block" id="ConfObj.kwargs"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfObj.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfObj.kwargs"><a class="viewcode-back" href="../../api/confmgr.ConfObj.html#confmgr.ConfObj.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This is an abstract method</span>
 
@@ -127,25 +127,25 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Attempt to call abstract class method&#39;</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="ConfDict"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict">[docs]</a><span class="k">class</span> <span class="nc">ConfDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">ConfObj</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfDict"><a class="viewcode-back" href="../../api/confmgr.ConfDict.html#confmgr.ConfDict">[docs]</a><span class="k">class</span> <span class="nc">ConfDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">ConfObj</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Represent a dictionary to store configurations. Some methods of the</span>
 <span class="sd">    dict class are overriden. The classes must be stored using the Config</span>
 <span class="sd">    class, unless they can be built using their string representation.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="ConfDict.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This class is constructed as a dictionary.</span>
 
 <span class="sd">        .. seealso:: :meth:`dict.__init__`, :meth:`ConfObj.__init__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="nb">dict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">ConfObj</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="nb">dict</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ConfObj</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ConfDict.__eq__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        The dictionaries are considered to be equivalent if the</span>
-<span class="sd">        information stored is the same.</span>
+<span class="sd">        Compare two ConfDict objects. The dictionaries are considered to</span>
+<span class="sd">        be equivalent if the information stored is the same.</span>
 
 <span class="sd">        :param other: another configuration to compare.</span>
 <span class="sd">        :type other: ConfMgr</span>
@@ -154,7 +154,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
 
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
                 <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">other</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">other</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
@@ -167,10 +167,13 @@
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># Everything went fine</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+        <span class="k">return</span> <span class="kc">True</span>
 
-<div class="viewcode-block" id="ConfDict.__ne__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__ne__">[docs]</a>    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Compare two ConfDict objects. The dictionaries are considered to</span>
+<span class="sd">        be different if the information stored is different.</span>
+
 <span class="sd">        :param other: another configuration to compare.</span>
 <span class="sd">        :type other: ConfMgr</span>
 <span class="sd">        :returns: comparison decision.</span>
@@ -178,9 +181,9 @@
 
 <span class="sd">        .. seealso:: :meth:`ConfDict.__eq__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ConfDict.__str__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Represent this class as a string, using the given</span>
 <span class="sd">        indentation level. The latter is meant for internal</span>
@@ -197,54 +200,58 @@
             <span class="n">maxl</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
             <span class="n">frmt</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">maxl</span><span class="p">)</span>
 
             <span class="n">ind</span> <span class="o">=</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">maxl</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
-                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="n">ind</span><span class="p">)))</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;</span><span class="si">{}</span><span class="s1">} = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(</span><span class="n">ind</span><span class="p">)))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;{}} = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{:&gt;</span><span class="si">{}</span><span class="s1">} = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frmt</span><span class="p">,</span> <span class="n">ind</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ConfDict.kwargs"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.kwargs"><a class="viewcode-back" href="../../api/confmgr.ConfDict.html#confmgr.ConfDict.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return the stored configuration.</span>
+
 <span class="sd">        :returns: stored configuration.</span>
 <span class="sd">        :rtype: ConfDict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="ConfDict.proc_conf"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfDict.proc_conf">[docs]</a>    <span class="k">def</span> <span class="nf">proc_conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfDict.proc_conf"><a class="viewcode-back" href="../../api/confmgr.ConfDict.html#confmgr.ConfDict.proc_conf">[docs]</a>    <span class="k">def</span> <span class="nf">proc_conf</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Process the configuration dictionary with all the class being built.</span>
+
 <span class="sd">        :returns: processed configuration dictionary, where \</span>
 <span class="sd">        all the built classes are saved.</span>
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">cfg</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Config</span><span class="p">):</span>
-                <span class="n">cfg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+                <span class="n">cfg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">cfg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
         <span class="k">return</span> <span class="n">cfg</span></div></div>
 
 
-<div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfDict</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../api/confmgr.ConfMgr.html#confmgr.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfDict</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to manage configurations built using the :class:`Config` class. It</span>
 <span class="sd">    allows to read/save the stored information from/to XML files.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="ConfMgr.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This class is constructed as a configuration dictionary.</span>
 
 <span class="sd">        .. seealso:: :meth:`ConfDict.__init__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">ConfDict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">ConfDict</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_create_xml_node</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -268,20 +275,20 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_create_xml_node</span><span class="p">(</span><span class="n">arels</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
             <span class="n">kwels</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="s1">&#39;kwargs&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">kwargs</span><span class="p">()</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">kwargs</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_create_xml_node</span><span class="p">(</span><span class="n">kwels</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">el</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">_class_path</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">__class__</span><span class="p">))</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">_class_path</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">el</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">_class_path</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">__class__</span><span class="p">),</span>
+                <span class="n">el</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">SubElement</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">_class_path</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="vm">__class__</span><span class="p">),</span>
                                    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">)</span>
             <span class="n">el</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">el</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_from_xml_node</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">node</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_from_xml_node</span><span class="p">(</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">node</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Extract the information from a XML node. If the node represents</span>
 <span class="sd">        an object, then a Config object is built with its constructor</span>
@@ -301,9 +308,9 @@
             <span class="c1"># The only children must be args and kwargs</span>
             <span class="n">arels</span><span class="p">,</span> <span class="n">kwels</span> <span class="o">=</span> <span class="n">children</span>
 
-            <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">cls</span><span class="o">.</span><span class="n">_from_xml_node</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">arels</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">_from_xml_node</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">arels</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
 
-            <span class="n">d</span> <span class="o">=</span> <span class="n">cls</span><span class="p">((</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">_from_xml_node</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">((</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_xml_node</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
                     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">kwels</span><span class="o">.</span><span class="n">getchildren</span><span class="p">())</span>
 
             <span class="n">path</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span>
@@ -324,12 +331,14 @@
             <span class="n">txt</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">text</span>
 
             <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># The eval call is needed to parse, for example, some builtin</span>
+                <span class="c1"># classes like dictionaries, lists, sets and tuples.</span>
                 <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">txt</span>
 
-<div class="viewcode-block" id="ConfMgr.from_file"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.from_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span> <span class="n">cls</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.from_file"><a class="viewcode-back" href="../../api/confmgr.ConfMgr.html#confmgr.ConfMgr.from_file">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Build the class from a configuration file.</span>
 
@@ -341,18 +350,20 @@
         <span class="n">tree</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">cls</span><span class="p">((</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">cls</span><span class="o">.</span><span class="n">_from_xml_node</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_xml_node</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
                    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">getchildren</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="ConfMgr.save"><a class="viewcode-back" href="../../core.html#confmgr.core.ConfMgr.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
+<div class="viewcode-block" id="ConfMgr.save"><a class="viewcode-back" href="../../api/confmgr.ConfMgr.html#confmgr.ConfMgr.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">path</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Save this class on a XML file.</span>
+
 <span class="sd">        :param path: path to the output file (adding the &#39;.xml&#39; \</span>
 <span class="sd">        extension is recomended).</span>
 <span class="sd">        :type path: str</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="n">_class_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">))</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="n">_class_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span>
 
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_create_xml_node</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
 
         <span class="n">tree</span> <span class="o">=</span> <span class="n">et</span><span class="o">.</span><span class="n">ElementTree</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
@@ -360,7 +371,7 @@
         <span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../core.html#confmgr.core.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">ConfObj</span><span class="p">):</span>
+<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../api/confmgr.Config.html#confmgr.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">ConfObj</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to store any class constructor plus its configuration. Note that two</span>
 <span class="sd">    Config objects are considered equivalent only if the provided arguments and</span>
@@ -382,7 +393,7 @@
 <span class="sd">       it is the only way to quarantee a good behaviour of the equivalence \</span>
 <span class="sd">       operators.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="Config.__init__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        The input configuration in &quot;conf&quot; is saved as a ConfMgr object,</span>
 <span class="sd">        to ensure that the :meth:`Config.build` method works properly.</span>
@@ -399,10 +410,22 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_const</span>  <span class="o">=</span> <span class="n">const</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_args</span>   <span class="o">=</span> <span class="n">args</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">ConfDict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">=</span> <span class="n">ConfDict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Config.__eq__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__eq__">[docs]</a>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return a class using the stored constructor and</span>
+<span class="sd">        configuration.</span>
+
+<span class="sd">        :returns: built class.</span>
+<span class="sd">        :rtype: built class type</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="o">.</span><span class="n">proc_conf</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Compare two Config objects.</span>
+
 <span class="sd">        :param other: another configurable to compare.</span>
 <span class="sd">        :type other: Config</span>
 <span class="sd">        :returns: comparison decision.</span>
@@ -419,9 +442,9 @@
             <span class="k">return</span> <span class="kc">False</span>
 
         <span class="c1"># Check the keyword arguments</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_kwargs</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_kwargs</span>
 
-<div class="viewcode-block" id="Config.__str__"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.__str__">[docs]</a>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Override the default :meth:`ConfDict.__str__` method,</span>
 <span class="sd">        displaying as well the information of the class.</span>
@@ -430,47 +453,43 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s1">&#39;{}()&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">()&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 
-        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{}(&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="o">.</span><span class="n">__name__</span><span class="p">)]</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">(&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)]</span>
 
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{:&gt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;{:&gt;</span><span class="si">{}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;{},</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="p">:</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">))</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="o">.</span><span class="fm">__str__</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="mi">5</span><span class="p">))</span>
 
         <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">indent</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Config.args"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.args">[docs]</a>    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.args"><a class="viewcode-back" href="../../api/confmgr.Config.html#confmgr.Config.args">[docs]</a>    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        :returns: standard arguments.</span>
+<span class="sd">        Return the arguments to be passed to the constructor.</span>
+
+<span class="sd">        :returns: arguments to be passed to the constructor.</span>
 <span class="sd">        :rtype: tuple</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span></div>
 
-<div class="viewcode-block" id="Config.build"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.const"><a class="viewcode-back" href="../../api/confmgr.Config.html#confmgr.Config.const">[docs]</a>    <span class="k">def</span> <span class="nf">const</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Return a class using the stored constructor and</span>
-<span class="sd">        configuration.</span>
+<span class="sd">        Return the class constructor.</span>
 
-<span class="sd">        :returns: built class.</span>
-<span class="sd">        :rtype: built class type</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_kwargs</span><span class="o">.</span><span class="n">proc_conf</span><span class="p">())</span></div>
-
-<div class="viewcode-block" id="Config.const"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.const">[docs]</a>    <span class="k">def</span> <span class="nf">const</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :returns: constructor for the class in this object.</span>
 <span class="sd">        :rtype: class constructor</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_const</span></div>
 
-<div class="viewcode-block" id="Config.kwargs"><a class="viewcode-back" href="../../core.html#confmgr.core.Config.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Config.kwargs"><a class="viewcode-back" href="../../api/confmgr.Config.html#confmgr.Config.kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">kwargs</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return the keyword to be passed to the constructor.</span>
+
 <span class="sd">        :returns: stored configuration.</span>
 <span class="sd">        :rtype: ConfDict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -493,8 +512,15 @@
 
 <h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../core.html">core</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../funcs.html">funcs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.check_configurations.html">check_configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.get_configurations.html">get_configurations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.ConfDict.html">ConfDict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.ConfMgr.html">ConfMgr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.ConfObj.html">ConfObj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.Config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/confmgr.config_builder.html">config_builder</a></li>
 </ul>
 
 <div class="relations">
@@ -524,7 +550,7 @@
       &copy;2017, Miguel Ramos Pernas.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
     </div>

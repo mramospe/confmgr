@@ -1,0 +1,7 @@
+<map id="inheritanceb8ca903885" name="inheritanceb8ca903885">
+<area shape="rect" id="node1" href="core.html#confmgr.core.ConfDict" target="_top" title="Represent a dictionary to store configurations. Some methods of the" alt="" coords="164,29,240,55"/>
+<area shape="rect" id="node3" href="core.html#confmgr.core.ConfMgr" target="_top" title="Class to manage configurations built using the :class:`Config` class. It" alt="" coords="288,29,363,55"/>
+<area shape="rect" id="node2" href="core.html#confmgr.core.ConfObj" target="_top" title="Base class for the configuration objects." alt="" coords="25,55,97,80"/>
+<area shape="rect" id="node4" href="core.html#confmgr.core.Config" target="_top" title="Class to store any class constructor plus its configuration. Note that two" alt="" coords="166,79,238,104"/>
+<area shape="rect" id="node5" href="core.html#confmgr.core.config_builder" target="_top" title="Decorator to wrap a class, creating a Config object when called." alt="" coords="5,5,116,31"/>
+</map>

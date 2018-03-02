@@ -1,0 +1,172 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ConfDict &#8212; confmgr 0.0.0.dev1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.0.dev1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ConfMgr" href="confmgr.ConfMgr.html" />
+    <link rel="prev" title="get_configurations" href="confmgr.get_configurations.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="confdict">
+<h1>ConfDict<a class="headerlink" href="#confdict" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="confmgr.ConfDict">
+<em class="property">class </em><code class="descclassname">confmgr.</code><code class="descname">ConfDict</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/confmgr/core.html#ConfDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.ConfDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">confmgr.core.ConfObj</span></code></p>
+<p>Represent a dictionary to store configurations. Some methods of the
+dict class are overriden. The classes must be stored using the Config
+class, unless they can be built using their string representation.</p>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#confmgr.ConfDict.kwargs" title="confmgr.ConfDict.kwargs"><code class="xref py py-obj docutils literal"><span class="pre">kwargs</span></code></a>()</td>
+<td>Return the stored configuration.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#confmgr.ConfDict.proc_conf" title="confmgr.ConfDict.proc_conf"><code class="xref py py-obj docutils literal"><span class="pre">proc_conf</span></code></a>()</td>
+<td>Process the configuration dictionary with all the class being built.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="confmgr.ConfDict.kwargs">
+<code class="descname">kwargs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/confmgr/core.html#ConfDict.kwargs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.ConfDict.kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the stored configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">stored configuration.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#confmgr.ConfDict" title="confmgr.ConfDict">ConfDict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="confmgr.ConfDict.proc_conf">
+<code class="descname">proc_conf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/confmgr/core.html#ConfDict.proc_conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.ConfDict.proc_conf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the configuration dictionary with all the class being built.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">processed configuration dictionary, where         all the built classes are saved.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">confmgr</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="confmgr.check_configurations.html">check_configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confmgr.get_configurations.html">get_configurations</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ConfDict</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confmgr.ConfMgr.html">ConfMgr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confmgr.ConfObj.html">ConfObj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confmgr.Config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confmgr.config_builder.html">config_builder</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="confmgr.get_configurations.html" title="previous chapter">get_configurations</a></li>
+      <li>Next: <a href="confmgr.ConfMgr.html" title="next chapter">ConfMgr</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Miguel Ramos Pernas.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/confmgr.ConfDict.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
