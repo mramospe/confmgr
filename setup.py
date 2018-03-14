@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-Setup script for the confmgr package
+Setup script for the "confmgr" package
 '''
 
 __author__ = 'Miguel Ramos Pernas'

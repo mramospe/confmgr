@@ -7,7 +7,7 @@ __email__  = 'miguel.ramos.pernas@cern.ch'
 
 
 # Python
-import importlib, inspect
+import importlib
 import xml.etree.cElementTree as et
 
 
@@ -102,8 +102,8 @@ class ConfDict(dict, ConfObj):
 
     def __eq__( self, other ):
         '''
-        The dictionaries are considered to be equivalent if the
-        information stored is the same.
+        Compare two ConfDict objects. The dictionaries are considered to
+        be equivalent if the information stored is the same.
 
         :param other: another configuration to compare.
         :type other: ConfMgr
@@ -112,7 +112,7 @@ class ConfDict(dict, ConfObj):
         '''
         if len(self) == len(other):
 
-            for k, v in self.iteritems():
+            for k, v in self.items():
 
                 if k in other:
                     if v == other[k]:
@@ -129,6 +129,9 @@ class ConfDict(dict, ConfObj):
 
     def __ne__( self, other ):
         '''
+        Compare two ConfDict objects. The dictionaries are considered to
+        be different if the information stored is different.
+
         :param other: another configuration to compare.
         :type other: ConfMgr
         :returns: comparison decision.
@@ -155,7 +158,7 @@ class ConfDict(dict, ConfObj):
             maxl = None
 
         lines = []
-        for k, v in self.iteritems():
+        for k, v in self.items():
 
             frmt = k.ljust(maxl)
 
@@ -170,6 +173,8 @@ class ConfDict(dict, ConfObj):
 
     def kwargs( self ):
         '''
+        Return the stored configuration.
+
         :returns: stored configuration.
         :rtype: ConfDict
         '''
@@ -177,14 +182,16 @@ class ConfDict(dict, ConfObj):
 
     def proc_conf( self ):
         '''
+        Process the configuration dictionary with all the class being built.
+
         :returns: processed configuration dictionary, where \
         all the built classes are saved.
         :rtype: dict
         '''
         cfg = {}
-        for k, v in self.iteritems():
+        for k, v in self.items():
             if isinstance(v, Config):
-                cfg[k] = v.build()
+                cfg[k] = v()
             else:
                 cfg[k] = v
 
@@ -226,7 +233,7 @@ class ConfMgr(ConfDict):
                 self._create_xml_node(arels, v)
 
             kwels = et.SubElement(el, 'kwargs')
-            for k, v in value.kwargs().iteritems():
+            for k, v in value.kwargs().items():
                 self._create_xml_node(kwels, v, k)
         else:
             if name is None:
@@ -306,13 +313,15 @@ class ConfMgr(ConfDict):
 
     def save( self, path ):
         '''
+        Save this class on a XML file.
+
         :param path: path to the output file (adding the '.xml' \
         extension is recomended).
         :type path: str
         '''
         root = et.Element(_class_path(self.__class__))
 
-        for k, v in self.iteritems():
+        for k, v in self.items():
             self._create_xml_node(root, v, k)
 
         tree = et.ElementTree(root)
@@ -361,8 +370,20 @@ class Config(ConfObj):
         self._args   = args
         self._kwargs = ConfDict(kwargs)
 
+    def __call__( self ):
+        '''
+        Return a class using the stored constructor and
+        configuration.
+
+        :returns: built class.
+        :rtype: built class type
+        '''
+        return self._const(*self._args, **self._kwargs.proc_conf())
+
     def __eq__( self, other ):
         '''
+        Compare two Config objects.
+
         :param other: another configurable to compare.
         :type other: Config
         :returns: comparison decision.
@@ -407,23 +428,17 @@ class Config(ConfObj):
 
     def args( self ):
         '''
-        :returns: standard arguments.
+        Return the arguments to be passed to the constructor.
+
+        :returns: arguments to be passed to the constructor.
         :rtype: tuple
         '''
         return self._args
 
-    def build( self ):
-        '''
-        Return a class using the stored constructor and
-        configuration.
-
-        :returns: built class.
-        :rtype: built class type
-        '''
-        return self._const(*self._args, **self._kwargs.proc_conf())
-
     def const( self ):
         '''
+        Return the class constructor.
+
         :returns: constructor for the class in this object.
         :rtype: class constructor
         '''
@@ -431,6 +446,8 @@ class Config(ConfObj):
 
     def kwargs( self ):
         '''
+        Return the keyword to be passed to the constructor.
+
         :returns: stored configuration.
         :rtype: ConfDict
         '''
