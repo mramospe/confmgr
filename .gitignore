@@ -57,4 +57,5 @@ confmgr.egg-info/
 confmgr/version.py
 
 # Other files #
+###############
 *.txt
