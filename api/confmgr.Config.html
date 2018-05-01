@@ -47,10 +47,10 @@
 <dt id="confmgr.Config">
 <em class="property">class </em><code class="descclassname">confmgr.</code><code class="descname">Config</code><span class="sig-paren">(</span><em>const</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/confmgr/core.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.Config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">confmgr.core.ConfObj</span></code></p>
-<p>Class to store any class constructor plus its configuration. Note that two
-Config objects are considered equivalent only if the provided arguments and
-keyword arguments are identical. Defaults are thus omitted, leading to
-the following behaviour:</p>
+<p>Class to store any class constructor plus its configuration.
+Note that two <a class="reference internal" href="#confmgr.Config" title="confmgr.Config"><code class="xref py py-class docutils literal"><span class="pre">Config</span></code></a> objects are considered equivalent only
+if the provided arguments and keyword arguments are identical.
+Defaults are thus omitted, leading to the following behaviour:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">Config</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">dummy</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="p">):</span>
@@ -62,9 +62,29 @@ the following behaviour:</p>
 <span class="go">False</span>
 </pre></div>
 </div>
+<p>The input configuration in “conf” is saved as a ConfMgr object,
+to ensure that the <code class="xref py py-meth docutils literal"><span class="pre">Config.build()</span></code> method works properly.
+This does not make any copy of the internal classes in “conf”.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>const</strong> (<em>any class constructor</em>) – constructor of the configurable class.</li>
+<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)"><em>tuple</em></a>) – arguments to <code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code>.</li>
+<li><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – keyword arguments to <code class="xref py py-meth docutils literal"><span class="pre">ConfDict.__init__()</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is highly recommended to work with keyword arguments, since        it is the only way to quarantee a good behaviour of the equivalence        operators.</p>
+<p class="last">It is highly recommended to work with keyword arguments, since            it is the only way to quarantee a good behaviour of the equivalence            operators.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">Config.build()</span></code></p>
 </div>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">

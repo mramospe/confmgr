@@ -57,28 +57,28 @@
 
 
 <div class="viewcode-block" id="config_builder"><a class="viewcode-back" href="../../api/confmgr.config_builder.html#confmgr.config_builder">[docs]</a><span class="k">class</span> <span class="nc">config_builder</span><span class="p">:</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Decorator to wrap a class, creating a Config object when called.</span>
-<span class="sd">    For example:</span>
 
-<span class="sd">    &gt;&gt;&gt; from confmgr import config_builder</span>
-<span class="sd">    &gt;&gt;&gt; @config_builder</span>
-<span class="sd">    ... def func( a, b ):</span>
-<span class="sd">    ...     return a, b</span>
-<span class="sd">    ...</span>
-<span class="sd">    &gt;&gt;&gt; print(func)</span>
-<span class="sd">    &lt;confmgr.core.config_builder instance at 0x7f9895318680&gt;</span>
-<span class="sd">    &gt;&gt;&gt; c = func(a = 0, b = 2)</span>
-<span class="sd">    &gt;&gt;&gt; c</span>
-<span class="sd">    &lt;confmgr.core.Config instance at 0x7f98950cb050&gt;</span>
-<span class="sd">    &gt;&gt;&gt; print(c)</span>
-<span class="sd">    func(</span>
-<span class="sd">         a = 0</span>
-<span class="sd">         b = 2</span>
-<span class="sd">         )</span>
-<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decorator to wrap a class, creating a Config object when called.</span>
+<span class="sd">        For example:</span>
+
+<span class="sd">        &gt;&gt;&gt; from confmgr import config_builder</span>
+<span class="sd">        &gt;&gt;&gt; @config_builder</span>
+<span class="sd">        ... def func( a, b ):</span>
+<span class="sd">        ...     return a, b</span>
+<span class="sd">        ...</span>
+<span class="sd">        &gt;&gt;&gt; print(func)</span>
+<span class="sd">        &lt;confmgr.core.config_builder instance at 0x7f9895318680&gt;</span>
+<span class="sd">        &gt;&gt;&gt; c = func(a = 0, b = 2)</span>
+<span class="sd">        &gt;&gt;&gt; c</span>
+<span class="sd">        &lt;confmgr.core.Config instance at 0x7f98950cb050&gt;</span>
+<span class="sd">        &gt;&gt;&gt; print(c)</span>
+<span class="sd">        func(</span>
+<span class="sd">             a = 0</span>
+<span class="sd">             b = 2</span>
+<span class="sd">             )</span>
+
 <span class="sd">        :param obj: object to build.</span>
 <span class="sd">        :type obj: any class</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -108,12 +108,10 @@
 
 
 <div class="viewcode-block" id="ConfObj"><a class="viewcode-back" href="../../api/confmgr.ConfObj.html#confmgr.ConfObj">[docs]</a><span class="k">class</span> <span class="nc">ConfObj</span><span class="p">:</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Base class for the configuration objects.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Empty constructor.</span>
+<span class="sd">        Base class for the configuration objects.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">pass</span>
 
@@ -128,14 +126,13 @@
 
 
 <div class="viewcode-block" id="ConfDict"><a class="viewcode-back" href="../../api/confmgr.ConfDict.html#confmgr.ConfDict">[docs]</a><span class="k">class</span> <span class="nc">ConfDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">ConfObj</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Represent a dictionary to store configurations. Some methods of the</span>
-<span class="sd">    dict class are overriden. The classes must be stored using the Config</span>
-<span class="sd">    class, unless they can be built using their string representation.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        This class is constructed as a dictionary.</span>
+<span class="sd">        Represent a dictionary to store configurations. Some methods of the</span>
+<span class="sd">        dict class are overriden. The classes must be stored using the Config</span>
+<span class="sd">        class, unless they can be built using their string representation.</span>
+<span class="sd">        The class is constructed as a dictionary.</span>
 
 <span class="sd">        .. seealso:: :meth:`dict.__init__`, :meth:`ConfObj.__init__`</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -241,12 +238,11 @@
 
 
 <div class="viewcode-block" id="ConfMgr"><a class="viewcode-back" href="../../api/confmgr.ConfMgr.html#confmgr.ConfMgr">[docs]</a><span class="k">class</span> <span class="nc">ConfMgr</span><span class="p">(</span><span class="n">ConfDict</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Class to manage configurations built using the :class:`Config` class. It</span>
-<span class="sd">    allows to read/save the stored information from/to XML files.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Class to manage configurations built using the :class:`Config` class. It</span>
+<span class="sd">        allows to read/save the stored information from/to XML files.</span>
 <span class="sd">        This class is constructed as a configuration dictionary.</span>
 
 <span class="sd">        .. seealso:: :meth:`ConfDict.__init__`</span>
@@ -372,29 +368,24 @@
 
 
 <div class="viewcode-block" id="Config"><a class="viewcode-back" href="../../api/confmgr.Config.html#confmgr.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">ConfObj</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Class to store any class constructor plus its configuration. Note that two</span>
-<span class="sd">    Config objects are considered equivalent only if the provided arguments and</span>
-<span class="sd">    keyword arguments are identical. Defaults are thus omitted, leading to</span>
-<span class="sd">    the following behaviour:</span>
 
-<span class="sd">    &gt;&gt;&gt; from confmgr import Config</span>
-<span class="sd">    &gt;&gt;&gt; class dummy:</span>
-<span class="sd">    ...     def __init__( self, a, b ):</span>
-<span class="sd">    ...         pass</span>
-<span class="sd">    ...</span>
-<span class="sd">    &gt;&gt;&gt; c1 = Config(dummy, 1, 0)</span>
-<span class="sd">    &gt;&gt;&gt; c2 = Config(dummy, 1, b = 0)</span>
-<span class="sd">    &gt;&gt;&gt; c1 == c2</span>
-<span class="sd">    False</span>
-
-<span class="sd">    .. note::</span>
-<span class="sd">       It is highly recommended to work with keyword arguments, since \</span>
-<span class="sd">       it is the only way to quarantee a good behaviour of the equivalence \</span>
-<span class="sd">       operators.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Class to store any class constructor plus its configuration.</span>
+<span class="sd">        Note that two :class:`Config` objects are considered equivalent only</span>
+<span class="sd">        if the provided arguments and keyword arguments are identical.</span>
+<span class="sd">        Defaults are thus omitted, leading to the following behaviour:</span>
+
+<span class="sd">        &gt;&gt;&gt; from confmgr import Config</span>
+<span class="sd">        &gt;&gt;&gt; class dummy:</span>
+<span class="sd">        ...     def __init__( self, a, b ):</span>
+<span class="sd">        ...         pass</span>
+<span class="sd">        ...</span>
+<span class="sd">        &gt;&gt;&gt; c1 = Config(dummy, 1, 0)</span>
+<span class="sd">        &gt;&gt;&gt; c2 = Config(dummy, 1, b = 0)</span>
+<span class="sd">        &gt;&gt;&gt; c1 == c2</span>
+<span class="sd">        False</span>
+
 <span class="sd">        The input configuration in &quot;conf&quot; is saved as a ConfMgr object,</span>
 <span class="sd">        to ensure that the :meth:`Config.build` method works properly.</span>
 <span class="sd">        This does not make any copy of the internal classes in &quot;conf&quot;.</span>
@@ -405,6 +396,11 @@
 <span class="sd">        :type args: tuple</span>
 <span class="sd">        :param kwargs: keyword arguments to :meth:`ConfDict.__init__`.</span>
 <span class="sd">        :type kwargs: dict</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">           It is highly recommended to work with keyword arguments, since \</span>
+<span class="sd">           it is the only way to quarantee a good behaviour of the equivalence \</span>
+<span class="sd">           operators.</span>
 
 <span class="sd">        .. seealso:: :meth:`Config.build`</span>
 <span class="sd">        &#39;&#39;&#39;</span>

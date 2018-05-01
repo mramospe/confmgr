@@ -45,7 +45,8 @@
 <dl class="class">
 <dt id="confmgr.config_builder">
 <em class="property">class </em><code class="descclassname">confmgr.</code><code class="descname">config_builder</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/confmgr/core.html#config_builder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#confmgr.config_builder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator to wrap a class, creating a Config object when called.
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Decorator to wrap a class, creating a Config object when called.
 For example:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confmgr</span> <span class="k">import</span> <span class="n">config_builder</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@config_builder</span>
@@ -64,6 +65,14 @@ For example:</p>
 <span class="go">     )</span>
 </pre></div>
 </div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>any class</em>) – object to build.</td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
