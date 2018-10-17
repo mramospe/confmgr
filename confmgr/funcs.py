@@ -32,19 +32,15 @@ def check_configurations( config, cfglst, skip = None ):
     :returns: list of configurations matching the input.
     :rtype: list(ConfMgr)
     '''
-    rmd = [ConfMgr(_drop(c, skip)) for c in cfglst]
+    cfglst_mod = [_drop(c, skip) for c in cfglst]
 
-    r = ConfMgr(_drop(config, skip))
+    config_mod = _drop(config, skip)
 
     matches = []
-    for cfg, rm in zip(cfglst, rmd):
+    for cfg, mod in zip(cfglst, cfglst_mod):
 
-        if cfg == config:
+        if mod == config_mod:
             matches.append(cfg)
-
-        cfg.update(rm)
-
-    config.update(r)
 
     return matches
 
@@ -62,15 +58,15 @@ def _drop( dct, drop = None ):
     '''
     drop = drop or {}
 
-    out = ConfMgr()
+    out = ConfMgr(dct)
     for c in set(dct.keys()) & set(drop.keys()):
 
         obj = drop[c]
         if obj is not None:
             # It is assumed to be a dictionary
-            out[c] = _drop(dct[c].kwargs(), obj)
+            out[c] = _drop(out[c].kwargs(), obj)
         else:
-            out[c] = dct.pop(c)
+            out.pop(c)
 
     return out
 
