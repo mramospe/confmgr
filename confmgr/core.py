@@ -15,28 +15,28 @@ __all__ = ['ConfDict', 'ConfMgr', 'ConfObj', 'Config', 'config_builder']
 
 
 class config_builder:
-    '''
-    Decorator to wrap a class, creating a Config object when called.
-    For example:
 
-    >>> from confmgr import config_builder
-    >>> @config_builder
-    ... def func( a, b ):
-    ...     return a, b
-    ...
-    >>> print(func)
-    <confmgr.core.config_builder instance at 0x7f9895318680>
-    >>> c = func(a = 0, b = 2)
-    >>> c
-    <confmgr.core.Config instance at 0x7f98950cb050>
-    >>> print(c)
-    func(
-         a = 0
-         b = 2
-         )
-    '''
     def __init__( self, obj ):
         '''
+        Decorator to wrap a class, creating a Config object when called.
+        For example:
+
+        >>> from confmgr import config_builder
+        >>> @config_builder
+        ... def func( a, b ):
+        ...     return a, b
+        ...
+        >>> print(func)
+        <confmgr.core.config_builder instance at 0x7f9895318680>
+        >>> c = func(a = 0, b = 2)
+        >>> c
+        <confmgr.core.Config instance at 0x7f98950cb050>
+        >>> print(c)
+        func(
+             a = 0
+             b = 2
+             )
+
         :param obj: object to build.
         :type obj: any class
         '''
@@ -66,12 +66,10 @@ def _class_path( const ):
 
 
 class ConfObj:
-    '''
-    Base class for the configuration objects.
-    '''
+
     def __init__( self ):
         '''
-        Empty constructor.
+        Base class for the configuration objects.
         '''
         pass
 
@@ -86,14 +84,13 @@ class ConfObj:
 
 
 class ConfDict(dict, ConfObj):
-    '''
-    Represent a dictionary to store configurations. Some methods of the
-    dict class are overriden. The classes must be stored using the Config
-    class, unless they can be built using their string representation.
-    '''
+
     def __init__( self, *args, **kwargs ):
         '''
-        This class is constructed as a dictionary.
+        Represent a dictionary to store configurations. Some methods of the
+        dict class are overriden. The classes must be stored using the Config
+        class, unless they can be built using their string representation.
+        The class is constructed as a dictionary.
 
         .. seealso:: :meth:`dict.__init__`, :meth:`ConfObj.__init__`
         '''
@@ -199,12 +196,11 @@ class ConfDict(dict, ConfObj):
 
 
 class ConfMgr(ConfDict):
-    '''
-    Class to manage configurations built using the :class:`Config` class. It
-    allows to read/save the stored information from/to XML files.
-    '''
+
     def __init__( self, *args, **kwargs ):
         '''
+        Class to manage configurations built using the :class:`Config` class. It
+        allows to read/save the stored information from/to XML files.
         This class is constructed as a configuration dictionary.
 
         .. seealso:: :meth:`ConfDict.__init__`
@@ -330,29 +326,24 @@ class ConfMgr(ConfDict):
 
 
 class Config(ConfObj):
-    '''
-    Class to store any class constructor plus its configuration. Note that two
-    Config objects are considered equivalent only if the provided arguments and
-    keyword arguments are identical. Defaults are thus omitted, leading to
-    the following behaviour:
 
-    >>> from confmgr import Config
-    >>> class dummy:
-    ...     def __init__( self, a, b ):
-    ...         pass
-    ...
-    >>> c1 = Config(dummy, 1, 0)
-    >>> c2 = Config(dummy, 1, b = 0)
-    >>> c1 == c2
-    False
-
-    .. note::
-       It is highly recommended to work with keyword arguments, since \
-       it is the only way to quarantee a good behaviour of the equivalence \
-       operators.
-    '''
     def __init__( self, const, *args, **kwargs ):
         '''
+        Class to store any class constructor plus its configuration.
+        Note that two :class:`Config` objects are considered equivalent only
+        if the provided arguments and keyword arguments are identical.
+        Defaults are thus omitted, leading to the following behaviour:
+
+        >>> from confmgr import Config
+        >>> class dummy:
+        ...     def __init__( self, a, b ):
+        ...         pass
+        ...
+        >>> c1 = Config(dummy, 1, 0)
+        >>> c2 = Config(dummy, 1, b = 0)
+        >>> c1 == c2
+        False
+
         The input configuration in "conf" is saved as a ConfMgr object,
         to ensure that the :meth:`Config.build` method works properly.
         This does not make any copy of the internal classes in "conf".
@@ -363,6 +354,11 @@ class Config(ConfObj):
         :type args: tuple
         :param kwargs: keyword arguments to :meth:`ConfDict.__init__`.
         :type kwargs: dict
+
+        .. note::
+           It is highly recommended to work with keyword arguments, since \
+           it is the only way to quarantee a good behaviour of the equivalence \
+           operators.
 
         .. seealso:: :meth:`Config.build`
         '''
